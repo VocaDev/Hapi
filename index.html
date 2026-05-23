@@ -106,7 +106,7 @@
       block-size: 52px;
       flex: 0 0 auto;
       border-radius: 14px;
-      background-image: url("ChatGPT Image May 23, 2026, 12_33_36 AM.png");
+      background-image: url("hapi-logo.png");
       background-size: 298px auto;
       background-position: 79.5% 15.6%;
       box-shadow: inset 0 0 0 1px rgba(255,255,255,.24), 0 10px 24px rgba(0,0,0,.18);
@@ -115,7 +115,7 @@
       width: 28px;
       height: 28px;
       border-radius: 8px;
-      background-image: url("ChatGPT Image May 23, 2026, 12_33_36 AM.png");
+      background-image: url("hapi-logo.png");
       background-size: 160px auto;
       background-position: 79.5% 15.6%;
       box-shadow: inset 0 0 0 1px rgba(13,27,61,.1);
@@ -552,7 +552,7 @@
 </head>
 <body>
   <div class="app-shell">
-    <aside class="sidebar" aria-label="Hapi navigation">
+    <aside class="sidebar" aria-label="Navigimi i Hapit">
       <div class="brand">
         <div class="brand-mark">
           <div class="brand-logo" aria-hidden="true"></div>
@@ -564,7 +564,7 @@
         <p>Platforma e ngjarjeve të jetës</p>
       </div>
       <div>
-        <p class="nav-title">Qytetari / Citizen</p>
+        <p class="nav-title">Qytetari</p>
         <div class="nav-group">
           <button class="nav-btn active" type="button" data-screen="dashboard">Paneli <span class="nav-kicker">01</span></button>
           <button class="nav-btn" type="button" data-screen="catalog">Ngjarjet <span class="nav-kicker">02</span></button>
@@ -574,9 +574,9 @@
           <button class="nav-btn" type="button" data-screen="assistant">Asistenti AI <span class="nav-kicker">06</span></button>
           <button class="nav-btn" type="button" data-screen="documents">Dokumentet <span class="nav-kicker">07</span></button>
         </div>
-        <p class="nav-title">Shteti / Government</p>
+        <p class="nav-title">Shteti</p>
         <div class="nav-group">
-          <button class="nav-btn" type="button" data-screen="gov">Intake & raste <span class="nav-kicker">08</span></button>
+          <button class="nav-btn" type="button" data-screen="gov">Pranimi i rasteve <span class="nav-kicker">08</span></button>
         </div>
       </div>
       <div class="sidebar-foot">
@@ -770,7 +770,7 @@
             </article>
             <article class="tile">
               <span class="status warn">Gati për nisje</span>
-              <div><h3>Regjistrimi i biznesit</h3><p class="small muted">Wizard 4-hapësh: identiteti, biznesi, pronësia, tatime &amp; banka. ARBK + ATK + KP + BQK.</p></div>
+              <div><h3>Regjistrimi i biznesit</h3><p class="small muted">Udhëzues 4-hapësh: identiteti, biznesi, pronësia, tatime &amp; banka. ARBK + ATK + KP + BQK.</p></div>
             </article>
             <article class="tile">
               <span class="status neutral">Automatik</span>
@@ -989,11 +989,11 @@
         <section class="screen" id="assistant" data-title="Asistenti AI në shqip" data-od-id="assistant">
           <div class="split">
             <div class="panel white">
-              <p class="eyebrow">FR-8 · Albanian-first AI</p>
+              <p class="eyebrow">FR-8 · AI në shqip</p>
               <h2>Asistenti përgjigjet me kontekst, por nuk shpik ligje apo afate.</h2>
               <div class="chat" style="margin-top: var(--space-6);">
                 <div class="bubble user">A duhet ta dërgoj vetë certifikatën e lindjes te MPMS?</div>
-                <div class="bubble"><strong>Hapi AI:</strong> Jo. Certifikata CL-2026-04781 është lëshuar nga Regjistri Civil dhe MPMS e sheh përmes journey-t të lindjes. Ti duhet vetëm të konfirmosh IBAN-in për pagesën dhe të rishikosh aplikimin për pushim të lehonisë.</div>
+                <div class="bubble"><strong>Hapi AI:</strong> Jo. Certifikata CL-2026-04781 është lëshuar nga Regjistri Civil dhe MPMS e sheh përmes rastit të lindjes. Ti duhet vetëm të konfirmosh IBAN-in për pagesën dhe të rishikosh aplikimin për pushim të lehonisë.</div>
                 <div class="bubble user">Kur është kontrolli i parë për Artën?</div>
                 <div class="bubble"><strong>Hapi AI:</strong> MSH ka propozuar QMF Prizren Qendër brenda 10 ditëve. Nëse ky QMF nuk të përshtatet, zgjidh një tjetër para datës 01.06.2026.</div>
               </div>
@@ -1006,13 +1006,13 @@
               <div class="assistant-input"><input aria-label="Pyet Hapi AI" value="A mund ta ndryshoj QMF-në?" /><button class="btn primary">Dërgo</button></div>
             </div>
             <div class="panel">
-              <h3>Guardrails / kufijtë</h3>
+              <h3>Kufijtë e asistentit</h3>
               <table class="table">
                 <tbody>
-                  <tr><td>Nuk shpik institucione</td><td><span class="status ok">On</span></td></tr>
-                  <tr><td>Nuk jep këshillë ligjore detyruese</td><td><span class="status ok">On</span></td></tr>
-                  <tr><td>Drejton te institucioni kur nuk është i sigurt</td><td><span class="status ok">On</span></td></tr>
-                  <tr><td>Përdor vetëm journey, dokumente dhe njoftime të qytetarit</td><td><span class="status ok">Scoped</span></td></tr>
+                  <tr><td>Nuk shpik institucione</td><td><span class="status ok">Aktiv</span></td></tr>
+                  <tr><td>Nuk jep këshillë ligjore detyruese</td><td><span class="status ok">Aktiv</span></td></tr>
+                  <tr><td>Drejton te institucioni kur nuk është i sigurt</td><td><span class="status ok">Aktiv</span></td></tr>
+                  <tr><td>Përdor vetëm rastin, dokumentet dhe njoftimet e qytetarit</td><td><span class="status ok">I kufizuar</span></td></tr>
                 </tbody>
               </table>
             </div>
@@ -1028,120 +1028,120 @@
               </div>
               <div class="kv"><strong>Referenca</strong><span class="mono">CL-2026-04781</span></div>
               <div class="kv"><strong>Fëmija</strong><span>Arta Krasniqi</span></div>
-              <div class="kv"><strong>Nëna</strong><span>Lirie Krasniqi · NP ending 4821</span></div>
+              <div class="kv"><strong>Nëna</strong><span>Lirie Krasniqi · NP që mbaron me 4821</span></div>
               <div class="kv"><strong>Vendi</strong><span>Spitali Rajonal i Prizrenit</span></div>
               <div class="kv"><strong>Data</strong><span>22.05.2026</span></div>
               <div class="stamp" style="margin-top: var(--space-6);">
-                E-STAMP · RC PRIZREN<br />
-                Issued 22.05.2026 10:42<br />
+                E-VULA · RC PRIZREN<br />
+                Lëshuar 22.05.2026 10:42<br />
                 SHA-256 9F2C-18B7-4AA0-DC91-77E4
               </div>
             </div>
             <div class="panel">
-              <div class="panel-head"><h3>Document vault</h3><span class="status ok">8 ready/in progress</span></div>
+              <div class="panel-head"><h3>Kasaforta e dokumenteve</h3><span class="status ok">8 gati / në vazhdim</span></div>
               <div class="doc-flow">
                 <div class="doc-group-label">U bë sot</div>
                 <div class="doc-card" data-doc-row="hospital">
                   <div class="doc-icon">H</div>
-                  <div><p class="eyebrow">Spitali Rajonal</p><h4>Hospital birth notification</h4><p>HRP-2026-1842 · stored in audit trail</p></div>
-                  <span class="status ok">Stored</span>
+                  <div><p class="eyebrow">Spitali Rajonal</p><h4>Njoftim i lindjes nga spitali</h4><p>HRP-2026-1842 · ruajtur në gjurmën e auditimit</p></div>
+                  <span class="status ok">Ruajtur</span>
                 </div>
                 <div class="doc-card" data-doc-row="verification">
                   <div class="doc-icon">RC</div>
-                  <div><p class="eyebrow">Regjistri Civil</p><h4>Birth verification record</h4><p>Mother, child, date and location verified</p></div>
-                  <span class="status ok">Stored</span>
+                  <div><p class="eyebrow">Regjistri Civil</p><h4>Procesverbal i verifikimit të lindjes</h4><p>Nëna, fëmija, data dhe vendi u verifikuan</p></div>
+                  <span class="status ok">Ruajtur</span>
                 </div>
                 <div class="doc-card" data-doc-row="birth-cert">
                   <div class="doc-icon">CL</div>
-                  <div><p class="eyebrow">Regjistri Civil</p><h4>Birth certificate</h4><p>Ref: CL-2026-04781 · ready for preview</p></div>
-                  <span class="status ok">Issued</span>
+                  <div><p class="eyebrow">Regjistri Civil</p><h4>Certifikatë e lindjes</h4><p>Ref: CL-2026-04781 · gati për shikim</p></div>
+                  <span class="status ok">Lëshuar</span>
                 </div>
                 <div class="doc-card" data-doc-row="personal-number">
                   <div class="doc-icon">NP</div>
-                  <div><p class="eyebrow">Regjistri Civil</p><h4>Personal number confirmation</h4><p>NP: 1262060XXXX</p></div>
-                  <span class="status warn">Preparing</span>
+                  <div><p class="eyebrow">Regjistri Civil</p><h4>Konfirmim i numrit personal</h4><p>NP: 1262060XXXX</p></div>
+                  <span class="status warn">Po përgatitet</span>
                 </div>
                 <div class="doc-card" data-doc-row="benefit">
                   <div class="doc-icon">€</div>
-                  <div><p class="eyebrow">Ministria e Punës</p><h4>Child benefit decision</h4><p>€20/month · starts 1 June 2026</p></div>
-                  <span class="status neutral">Waiting IBAN</span>
+                  <div><p class="eyebrow">Ministria e Punës</p><h4>Vendim për pagesën e fëmijës</h4><p>€20/muaj · fillon më 1 qershor 2026</p></div>
+                  <span class="status neutral">Pret IBAN</span>
                 </div>
 
                 <div class="doc-group-label future">Vjen më vonë</div>
                 <div class="doc-card future" data-doc-row="vaccine">
                   <div class="doc-icon">MSH</div>
-                  <div><p class="eyebrow">Ministria e Shëndetësisë</p><h4>Vaccine schedule</h4><p>BCG, first checkup and pediatric reminders</p></div>
-                  <span class="status planned">Queued</span>
+                  <div><p class="eyebrow">Ministria e Shëndetësisë</p><h4>Kalendari i vaksinimit</h4><p>BCG, kontrolli i parë dhe rikujtuesit pediatrikë</p></div>
+                  <span class="status planned">Në radhë</span>
                 </div>
 
                 <div class="doc-group-label">Dokumente personale me afat</div>
                 <div class="doc-card" data-doc-row="passport">
                   <div class="doc-icon">PS</div>
                   <div><p class="eyebrow">MPB · Pasaporta</p><h4>Pasaportë biometrike</h4><p>P00485712 · skadon 18.08.2026 · termin propozuar 26.05.2026</p></div>
-                  <span class="status warn">Renew · 87d</span>
+                  <span class="status warn">Rinovo · 87d</span>
                 </div>
                 <div class="doc-card" data-doc-row="driving">
                   <div class="doc-icon">PT</div>
                   <div><p class="eyebrow">MPB · Drejtoria e Patentave</p><h4>Patentë shoferi (kat. B)</h4><p>PT-2016-99214 · skadon 02.11.2026 · kërkon kontroll mjekësor</p></div>
-                  <span class="status warn">Renew · 163d</span>
+                  <span class="status warn">Rinovo · 163d</span>
                 </div>
                 <div class="doc-card" data-doc-row="id-card">
                   <div class="doc-icon">LN</div>
                   <div><p class="eyebrow">MPB</p><h4>Letërnjoftim</h4><p>ID-148265 · skadon 14.03.2031 · asnjë veprim</p></div>
-                  <span class="status ok">Valid</span>
+                  <span class="status ok">I vlefshëm</span>
                 </div>
               </div>
-              <button class="btn primary" data-download-cert style="margin-top: var(--space-4);">Print / Download HTML</button>
+              <button class="btn primary" data-download-cert style="margin-top: var(--space-4);">Printo / Shkarko HTML</button>
             </div>
           </div>
         </section>
 
         <section class="screen" id="privacy" data-title="Ku shkojnë të dhënat e mia?" data-od-id="privacy">
           <div class="panel white">
-            <p class="eyebrow">Privacy · data minimization</p>
+            <p class="eyebrow">Privatësi · minimizim i të dhënave</p>
             <h2>Ku shkojnë të dhënat e mia?</h2>
-            <p class="lead">Hapi tregon saktësisht cilat të dhëna ndahen, me kë, pse, dhe nëse qytetari ka dhënë consent.</p>
+            <p class="lead">Hapi tregon saktësisht cilat të dhëna ndahen, me kë, pse, dhe nëse qytetari ka dhënë pëlqim.</p>
             <div style="margin-top: var(--space-6);">
-              <div class="map-row"><strong>Regjistri Civil</strong><span>Emri i fëmijës, data/vendi i lindjes, prindi, referenca e spitalit</span><span class="status ok">Legal basis</span></div>
-              <div class="map-row"><strong>MPMS</strong><span>Certifikata e lindjes, NP e prindit, IBAN vetëm pas konfirmimit</span><span class="status warn">Consent for IBAN</span></div>
-              <div class="map-row"><strong>MSH</strong><span>Mosha e fëmijës, vendbanimi, QMF e zgjedhur</span><span class="status warn">Citizen choice</span></div>
-              <div class="map-row"><strong>Komuna e Prizrenit</strong><span>Vetëm rikujtuesi për kopsht, i planifikuar +2 vite</span><span class="status neutral">Future</span></div>
-              <div class="map-row"><strong>MPB (Pasaporta &amp; Patentë)</strong><span>Numri i dokumentit, data e skadimit, foto biometrike — vetëm gjatë rinovimit</span><span class="status warn">Active during renewal</span></div>
-              <div class="map-row"><strong>ARBK</strong><span>Emri, forma ligjore, NACE, kapitali, UBO — vetëm për regjistrim biznesi</span><span class="status warn">Business only</span></div>
-              <div class="map-row"><strong>ATK</strong><span>Numri fiskal, statusi i TVSH-së, xhiroja agreguar — pa transaksione individuale</span><span class="status warn">Business only</span></div>
-              <div class="map-row"><strong>BQK</strong><span>Vetëm sinjali për KYC te banka e zgjedhur · nuk ndahen bilancet</span><span class="status warn">Consent at choice</span></div>
-              <div class="map-row"><strong>AI assistant</strong><span>Pyetja dhe konteksti minimal i journey-t; jo të dhëna jashtë rastit</span><span class="status ok">Scoped</span></div>
+              <div class="map-row"><strong>Regjistri Civil</strong><span>Emri i fëmijës, data/vendi i lindjes, prindi, referenca e spitalit</span><span class="status ok">Bazë ligjore</span></div>
+              <div class="map-row"><strong>MPMS</strong><span>Certifikata e lindjes, NP e prindit, IBAN vetëm pas konfirmimit</span><span class="status warn">Pëlqim për IBAN</span></div>
+              <div class="map-row"><strong>MSH</strong><span>Mosha e fëmijës, vendbanimi, QMF e zgjedhur</span><span class="status warn">Zgjedhje e qytetarit</span></div>
+              <div class="map-row"><strong>Komuna e Prizrenit</strong><span>Vetëm rikujtuesi për kopsht, i planifikuar +2 vite</span><span class="status neutral">Më vonë</span></div>
+              <div class="map-row"><strong>MPB (Pasaporta &amp; Patentë)</strong><span>Numri i dokumentit, data e skadimit, foto biometrike — vetëm gjatë rinovimit</span><span class="status warn">Aktive gjatë rinovimit</span></div>
+              <div class="map-row"><strong>ARBK</strong><span>Emri, forma ligjore, NACE, kapitali, UBO — vetëm për regjistrim biznesi</span><span class="status warn">Vetëm biznes</span></div>
+              <div class="map-row"><strong>ATK</strong><span>Numri fiskal, statusi i TVSH-së, xhiroja agreguar — pa transaksione individuale</span><span class="status warn">Vetëm biznes</span></div>
+              <div class="map-row"><strong>BQK</strong><span>Vetëm sinjali për KYC te banka e zgjedhur · nuk ndahen bilancet</span><span class="status warn">Pëlqim te zgjedhja</span></div>
+              <div class="map-row"><strong>Asistenti AI</strong><span>Pyetja dhe konteksti minimal i rastit; jo të dhëna jashtë rastit</span><span class="status ok">I kufizuar</span></div>
             </div>
           </div>
         </section>
 
-        <section class="screen" id="gov" data-title="Government intake & case management" data-od-id="gov">
+        <section class="screen" id="gov" data-title="Pranimi dhe menaxhimi i rasteve" data-od-id="gov">
           <div class="panel-head">
-            <div><p class="eyebrow">Gov staff · Erza Aliu</p><h2>Një inbox për rastet hyrëse, verifikim dhe avancim hapash.</h2></div>
-            <button class="btn secondary">Verify selected case</button>
+            <div><p class="eyebrow">Stafi qeveritar · Erza Aliu</p><h2>Një kuti hyrëse për rastet, verifikim dhe avancim hapash.</h2></div>
+            <button class="btn secondary">Verifiko rastin e zgjedhur</button>
           </div>
           <div class="grid cols-4">
-            <div class="panel"><div class="metric mono">14</div><p class="caption">incoming cases</p></div>
-            <div class="panel"><div class="metric mono">4m</div><p class="caption">median verification</p></div>
-            <div class="panel"><div class="metric mono">5</div><p class="caption">institutions in pilot</p></div>
-            <div class="panel"><div class="metric mono">0</div><p class="caption">duplicate entries</p></div>
+            <div class="panel"><div class="metric mono">14</div><p class="caption">raste hyrëse</p></div>
+            <div class="panel"><div class="metric mono">4m</div><p class="caption">mediana e verifikimit</p></div>
+            <div class="panel"><div class="metric mono">5</div><p class="caption">institucione në pilot</p></div>
+            <div class="panel"><div class="metric mono">0</div><p class="caption">hyrje duplikate</p></div>
           </div>
           <div class="panel white" style="margin-top: var(--space-4);">
             <table class="table">
-              <thead><tr><th>Case</th><th>Citizen</th><th>Trigger</th><th>Checklist</th><th>Status</th><th>Next owner</th></tr></thead>
+              <thead><tr><th>Rasti</th><th>Qytetari</th><th>Aktivizimi</th><th>Lista e kontrollit</th><th>Statusi</th><th>Pronari i ardhshëm</th></tr></thead>
               <tbody>
-                <tr><td class="mono">CASE-L01-1842</td><td>Lirie Krasniqi / Arta</td><td>HRP digital birth notification</td><td>Identity, duplicate, consent, hospital ref</td><td><span class="status warn">VERIFYING</span></td><td>RC Prizren</td></tr>
-                <tr><td class="mono">CASE-L09-0431</td><td>Drilon Krasniqi</td><td>Citizen wizard (Krasniqi Digital sh.p.k.)</td><td>Name, NUB, UBO, NACE, capital, address</td><td><span class="status neutral">INCOMING</span></td><td>ARBK</td></tr>
-                <tr><td class="mono">CASE-L10-7710</td><td>Era Krasniqi</td><td>DOB scan T-30</td><td>Citizenship, DOB, address, license eligibility</td><td><span class="status ok">ACTIVE</span></td><td>MPB</td></tr>
-                <tr><td class="mono">CASE-RNW-2261</td><td>Lirie Krasniqi</td><td>Passport expiry T-90 alert</td><td>Identity, photo capture slot, fee payment</td><td><span class="status warn">SCHEDULED</span></td><td>MPB Prizren</td></tr>
-                <tr><td class="mono">CASE-RNW-2188</td><td>Drilon Krasniqi</td><td>Driving license expiry T-163</td><td>Medical exam, photo, category check</td><td><span class="status neutral">QUEUED</span></td><td>MPB · Patentat</td></tr>
+                <tr><td class="mono">CASE-L01-1842</td><td>Lirie Krasniqi / Arta</td><td>Njoftim digjital i lindjes nga HRP</td><td>Identitet, duplikat, pëlqim, ref. spitali</td><td><span class="status warn">PO VERIFIKOHET</span></td><td>RC Prizren</td></tr>
+                <tr><td class="mono">CASE-L09-0431</td><td>Drilon Krasniqi</td><td>Kërkesë nga qytetari (Krasniqi Digital sh.p.k.)</td><td>Emri, NUB, UBO, NACE, kapitali, adresa</td><td><span class="status neutral">HYRËSE</span></td><td>ARBK</td></tr>
+                <tr><td class="mono">CASE-L10-7710</td><td>Era Krasniqi</td><td>Skanim datëlindjeje T-30</td><td>Shtetësia, datëlindja, adresa, përshtatshmëri patente</td><td><span class="status ok">AKTIV</span></td><td>MPB</td></tr>
+                <tr><td class="mono">CASE-RNW-2261</td><td>Lirie Krasniqi</td><td>Alarm skadimi pasaporte T-90</td><td>Identitet, termin për foto, pagesë tarife</td><td><span class="status warn">I CAKTUAR</span></td><td>MPB Prizren</td></tr>
+                <tr><td class="mono">CASE-RNW-2188</td><td>Drilon Krasniqi</td><td>Skadim i patentës së shoferit T-163</td><td>Kontroll mjekësor, foto, kontroll kategorie</td><td><span class="status neutral">NË RADHË</span></td><td>MPB · Patentat</td></tr>
               </tbody>
             </table>
           </div>
           <div class="grid cols-3" style="margin-top: var(--space-4);">
-            <div class="panel"><h3>Verification checklist</h3><p class="small muted">A journey moves from PENDING_VERIFICATION to ACTIVE only after staff completes the checklist.</p></div>
-            <div class="panel"><h3>Scoped institution view</h3><p class="small muted">Staff sees routed steps for their institution, with cross-institution audit visibility.</p></div>
-            <div class="panel"><h3>Adapter-ready intake</h3><p class="small muted">The v1 web intake mirrors the future authenticated POST /api/intake/{institution-id} contract.</p></div>
+            <div class="panel"><h3>Lista e verifikimit</h3><p class="small muted">Një rast kalon nga "Pret verifikim" në "Aktiv" vetëm pasi stafi e plotëson listën e kontrollit.</p></div>
+            <div class="panel"><h3>Pamje e kufizuar për institucionin</h3><p class="small muted">Stafi sheh hapat e drejtuar te institucioni i tij, me dukshmëri auditi ndër-institucionale.</p></div>
+            <div class="panel"><h3>Pranim i gatshëm për adaptues</h3><p class="small muted">Pranimi web i v1 pasqyron kontratën e ardhshme me autentikim POST /api/intake/{institution-id}.</p></div>
           </div>
         </section>
       </div>
@@ -1219,7 +1219,7 @@
       const summary = document.querySelector('#business .panel .status');
       if (summary) {
         summary.className = 'status ok demo-pulse';
-        summary.textContent = 'Ready';
+        summary.textContent = 'Gati';
         setTimeout(() => summary.classList.remove('demo-pulse'), 900);
       }
       addNotification('Përmbledhja për ARBK u gjenerua', 'Krasniqi Digital sh.p.k. është gati për dërgim.');
@@ -1247,7 +1247,7 @@
       const statusEl = step.querySelector('.status');
       if (statusEl) {
         statusEl.className = 'status warn demo-pulse';
-        statusEl.textContent = 'Processing';
+        statusEl.textContent = 'Po procesohet';
       }
       setTimeout(() => {
         step.classList.remove('completing');
@@ -1321,15 +1321,15 @@
 
     function resetBirthDemo() {
       const states = [
-        ['Completed', 'ok', 'done'],
-        ['Completed', 'ok', 'done'],
-        ['Issued', 'ok', 'done'],
-        ['In progress', 'warn', 'current'],
-        ['Action needed', 'warn', ''],
-        ['Ready', 'neutral', ''],
-        ['Queued', 'planned', 'future'],
-        ['+10 days', 'planned', 'future'],
-        ['Scheduled', 'planned', 'future'],
+        ['Përfunduar', 'ok', 'done'],
+        ['Përfunduar', 'ok', 'done'],
+        ['Lëshuar', 'ok', 'done'],
+        ['Në vazhdim', 'warn', 'current'],
+        ['Veprim i nevojshëm', 'warn', ''],
+        ['Gati', 'neutral', ''],
+        ['Në radhë', 'planned', 'future'],
+        ['+10 ditë', 'planned', 'future'],
+        ['I caktuar', 'planned', 'future'],
       ];
       document.querySelectorAll('#birth .step').forEach((step, index) => {
         const [label, kind, cls] = states[index];
@@ -1348,23 +1348,23 @@
       if (journeyStatus) {
         journeyStatus.className = 'status warn';
         journeyStatus.setAttribute('data-journey-status', '');
-        journeyStatus.textContent = 'Draft';
+        journeyStatus.textContent = 'Skicë';
       }
-      setFlowDoc('business-nub', 'NUB queued', 'neutral');
-      setFlowDoc('business-tax', 'Fiscal queued', 'neutral');
+      setFlowDoc('business-nub', 'NUB në radhë', 'neutral');
+      setFlowDoc('business-tax', 'Numri fiskal në radhë', 'neutral');
     }
 
     function resetTurningDemo() {
       const rows = [
-        ['Completed', 'ok'],
-        ['Ready', 'ok'],
-        ['Review', 'warn'],
-        ['Scheduled', 'neutral'],
-        ['+14 days', 'neutral'],
+        ['Përfunduar', 'ok'],
+        ['Gati', 'ok'],
+        ['Rishiko', 'warn'],
+        ['I caktuar', 'neutral'],
+        ['+14 ditë', 'neutral'],
       ];
       rows.forEach(([label, kind], index) => setTableStatus('turning18', index + 1, label, kind));
-      setFlowDoc('eighteen-voter', 'Voter queued', 'neutral');
-      setFlowDoc('eighteen-passport', 'Passport queued', 'neutral');
+      setFlowDoc('eighteen-voter', 'Lista votuese në radhë', 'neutral');
+      setFlowDoc('eighteen-passport', 'Pasaporta në radhë', 'neutral');
     }
 
     function startFlowDemo(flowId) {
@@ -1377,23 +1377,23 @@
     function playBirthDemo() {
       resetBirthDemo();
       certificateDoc?.classList.remove('ready-glow');
-      setDocStatus('personal-number', 'Preparing', 'warn');
-      setDocStatus('benefit', 'Waiting IBAN', 'neutral');
-      setDocStatus('vaccine', 'Queued', 'planned');
+      setDocStatus('personal-number', 'Po përgatitet', 'warn');
+      setDocStatus('benefit', 'Pret IBAN', 'neutral');
+      setDocStatus('vaccine', 'Në radhë', 'planned');
       delay(1050, () => {
-        setStep('birth', 4, 'Issued');
-        setDocStatus('personal-number', 'Download ready', 'ok');
+        setStep('birth', 4, 'Lëshuar');
+        setDocStatus('personal-number', 'Gati për shkarkim', 'ok');
       });
       delay(1750, () => {
-        setStep('birth', 5, 'Approved');
-        setDocStatus('benefit', 'Approved', 'ok');
+        setStep('birth', 5, 'Miratuar');
+        setDocStatus('benefit', 'Miratuar', 'ok');
       });
       delay(2450, () => {
-        setStep('birth', 6, 'Ready');
+        setStep('birth', 6, 'Gati');
       });
       delay(3150, () => {
-        setStep('birth', 7, 'Scheduled');
-        setDocStatus('vaccine', 'Download ready', 'ok');
+        setStep('birth', 7, 'I caktuar');
+        setDocStatus('vaccine', 'Gati për shkarkim', 'ok');
         addNotification('Termin: Vaksina BCG', '24 maj 2026 · 10:00 · Spitali Rajonal i Prizrenit.');
       });
     }
@@ -1404,12 +1404,12 @@
         const summary = document.querySelector('#business [data-journey-status]');
         if (summary) {
           summary.className = 'status ok';
-          summary.textContent = 'Approved';
+          summary.textContent = 'Miratuar';
         }
         setFlowDoc('business-nub', 'NUB 811234567', 'ok');
       });
       delay(2100, () => {
-        setFlowDoc('business-tax', 'Fiscal 600901234', 'ok');
+        setFlowDoc('business-tax', 'Numri fiskal 600901234', 'ok');
         addNotification('Afati i parë tatimor', 'Krasniqi Digital sh.p.k. · deklarata e parë në ATK pas 90 ditësh.');
       });
     }
@@ -1417,17 +1417,17 @@
     function playTurning18Demo() {
       resetTurningDemo();
       delay(950, () => {
-        setTableStatus('turning18', 3, 'Confirmed', 'ok');
-        setFlowDoc('eighteen-voter', 'Voter ready', 'ok');
+        setTableStatus('turning18', 3, 'Konfirmuar', 'ok');
+        setFlowDoc('eighteen-voter', 'Lista votuese gati', 'ok');
       });
       delay(1550, () => {
-        setTableStatus('turning18', 4, 'Active', 'ok');
+        setTableStatus('turning18', 4, 'Aktive', 'ok');
       });
       delay(2250, () => {
-        setTableStatus('turning18', 5, 'Suggested', 'ok');
+        setTableStatus('turning18', 5, 'E sugjeruar', 'ok');
       });
       delay(2950, () => {
-        setFlowDoc('eighteen-passport', 'Passport appointment ready', 'ok');
+        setFlowDoc('eighteen-passport', 'Termini i pasaportës gati', 'ok');
         addNotification('Termin për pasaportë', '27 maj 2026 · 11:00 · Drejtoria Rajonale e MPB-së.');
       });
     }
@@ -1450,10 +1450,10 @@
         '<div class="head"><strong>REPUBLIKA E KOSOVËS · REGJISTRI CIVIL</strong><h1>Certifikatë e lindjes</h1><\/div>',
         '<div class="row"><strong>Referenca</strong><span>CL-2026-04781<\/span><\/div>',
         '<div class="row"><strong>Fëmija</strong><span>Arta Krasniqi<\/span><\/div>',
-        '<div class="row"><strong>Nëna</strong><span>Lirie Krasniqi · NP ending 4821<\/span><\/div>',
+        '<div class="row"><strong>Nëna</strong><span>Lirie Krasniqi · NP që mbaron me 4821<\/span><\/div>',
         '<div class="row"><strong>Vendi</strong><span>Spitali Rajonal i Prizrenit<\/span><\/div>',
         '<div class="row"><strong>Data</strong><span>22.05.2026<\/span><\/div>',
-        '<div class="seal">E-STAMP · RC PRIZREN<br>SHA-256 9F2C-18B7-4AA0-DC91-77E4<\/div>',
+        '<div class="seal">E-VULA · RC PRIZREN<br>SHA-256 9F2C-18B7-4AA0-DC91-77E4<\/div>',
         '<\/body>',
         '<\/html>',
       ].join('');
@@ -1480,7 +1480,7 @@
 
       document.querySelector('.notif-item[data-trigger-source]')?.remove();
 
-      showToast('Spitali Rajonal i Prizrenit ka raportuar lindjen e Artës. Hapi po krijon journey-n…');
+      showToast('Spitali Rajonal i Prizrenit ka raportuar lindjen e Artës. Hapi po krijon rastin…');
 
       delay(420, () => {
         if (notifCountEl) {
@@ -1496,7 +1496,7 @@
           const item = document.createElement('div');
           item.className = 'notif-item new';
           item.dataset.triggerSource = 'proactive-demo';
-          item.innerHTML = '<strong>L01 · Lindja e Artës</strong><span>Journey i ri u nis automatikisht nga njoftimi i HRP.</span>';
+          item.innerHTML = '<strong>L01 · Lindja e Artës</strong><span>Rast i ri u nis automatikisht nga njoftimi i HRP.</span>';
           notifListEl.prepend(item);
         }
       });
