@@ -659,21 +659,21 @@
                     <h4>Pasaporta juaj skadon për 87 ditë</h4>
                     <p>P00485712 skadon më 18.08.2026. Hapi propozon termin më 26.05.2026 në MPB Prizren.</p>
                   </div>
-                  <button class="btn primary small" type="button">Cakto termin</button>
+                  <button class="btn primary small" type="button" data-toast="Termin i caktuar: 26.05.2026 · 10:30 · MPB Prizren. Konfirmimi u dërgua me email dhe SMS.">Cakto termin</button>
                 </div>
                 <div class="task-item">
                   <div>
                     <h4>Konfirmo IBAN për pagesën e fëmijës</h4>
                     <p>Pagesa mujore për Artën fillon më 1 qershor 2026.</p>
                   </div>
-                  <button class="btn primary small" type="button">Konfirmo</button>
+                  <button class="btn primary small" type="button" data-toast="IBAN u konfirmua. MPMS po aktivizon pagesën mujore prej 20 EUR.">Konfirmo</button>
                 </div>
                 <div class="task-item">
                   <div>
                     <h4>Zgjidh QMF për kontrollin e parë</h4>
                     <p>MSH propozon QMF Prizren Qendër; mund ta pranoni ose ndryshoni.</p>
                   </div>
-                  <button class="btn ghost small" type="button">Zgjidh</button>
+                  <button class="btn ghost small" type="button" data-toast="QMF Prizren Qendër u zgjodh për Artën. Termini do të caktohet brenda 10 ditësh.">Zgjidh</button>
                 </div>
                 <div class="task-item done">
                   <div>
@@ -751,7 +751,7 @@
             </table>
             <div class="action-strip" style="margin-top: var(--space-4);">
               <div><strong>Asistenti i rinovimit</strong><p class="small muted">Pre-mbushim formularësh, propozim terminesh dhe pagesa në një hap. Qytetari konfirmon, Hapi e bën pjesën tjetër.</p></div>
-              <button class="btn primary small" type="button">Aktivizo për të gjitha</button>
+              <button class="btn primary small" type="button" data-toast="Asistenti i rinovimit u aktivizua për 4 dokumente. Hapi do të paralajmërojë T-90 ditë para çdo skadimi.">Aktivizo për të gjitha</button>
             </div>
           </div>
         </section>
@@ -999,12 +999,12 @@
                 <div class="bubble"><strong>Hapi AI:</strong> MSH ka propozuar QMF Prizren Qendër brenda 10 ditëve. Nëse ky QMF nuk të përshtatet, zgjidh një tjetër para datës 01.06.2026.</div>
               </div>
               <div class="chips" style="margin-top: var(--space-4);">
-                <button class="chip">Çfarë pret nga unë sot?</button>
-                <button class="chip">Shpjego dokumentet e gatshme</button>
-                <button class="chip">Ku shkojnë të dhënat e mia?</button>
-                <button class="chip">Çfarë ndodh nëse humbas afatin?</button>
+                <button class="chip" type="button" data-toast="Hapi AI: Sot presin 3 veprime — termin pasaporte, IBAN dhe QMF për Artën.">Çfarë pret nga unë sot?</button>
+                <button class="chip" type="button" data-toast="Hapi AI: 3 dokumente janë gati në kasafortë; 3 të tjera janë në përgatitje.">Shpjego dokumentet e gatshme</button>
+                <button class="chip" type="button" data-screen-jump="privacy">Ku shkojnë të dhënat e mia?</button>
+                <button class="chip" type="button" data-toast="Hapi AI: Afatet zgjaten 14 ditë automatikisht; institucioni dërgon njoftim para skadimit.">Çfarë ndodh nëse humbas afatin?</button>
               </div>
-              <div class="assistant-input"><input aria-label="Pyet Hapi AI" value="A mund ta ndryshoj QMF-në?" /><button class="btn primary">Dërgo</button></div>
+              <div class="assistant-input"><input aria-label="Pyet Hapi AI" value="A mund ta ndryshoj QMF-në?" /><button class="btn primary" type="button" data-toast="Pyetja u dërgua. Hapi AI po përgjigjet duke përdorur vetëm kontekstin e rastit tuaj.">Dërgo</button></div>
             </div>
             <div class="panel">
               <h3>Kufijtë e asistentit</h3>
@@ -1119,7 +1119,7 @@
         <section class="screen" id="gov" data-title="Pranimi dhe menaxhimi i rasteve" data-od-id="gov">
           <div class="panel-head">
             <div><p class="eyebrow">Stafi qeveritar · Erza Aliu</p><h2>Një kuti hyrëse për rastet, verifikim dhe avancim hapash.</h2></div>
-            <button class="btn secondary">Verifiko rastin e zgjedhur</button>
+            <button class="btn secondary" type="button" data-toast="Lista e verifikimit u hap për CASE-L01-1842. Stafi duhet të konfirmojë 4 pika para se rasti të kalojë në AKTIV.">Verifiko rastin e zgjedhur</button>
           </div>
           <div class="grid cols-4">
             <div class="panel"><div class="metric mono">14</div><p class="caption">raste hyrëse</p></div>
@@ -1207,6 +1207,12 @@
         notifPanel.classList.remove('open');
         notificationBell.setAttribute('aria-expanded', 'false');
       }
+    });
+
+    document.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target : null;
+      const trigger = target?.closest('[data-toast]');
+      if (trigger) showToast(trigger.dataset.toast);
     });
 
     document.querySelector('[data-download-cert]')?.addEventListener('click', downloadCertificate);
