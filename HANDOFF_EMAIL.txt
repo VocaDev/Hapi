@@ -1,0 +1,26 @@
+Subject: Hapi OpenDesign prototype package for JunctionX
+To: gentian.voca@umib.net
+
+Hi Gentian,
+
+Attached is the OpenDesign-generated hackathon package for Hapi · Shtresa proaktive për eKosova, based on the HAPI_APP_REQUIREMENTS.md brief.
+
+Included:
+- index.html — clickable high-fidelity Hapi prototype
+- pitch-deck.html — 10-slide HTML jury pitch deck with keyboard navigation
+- DEMO_SCRIPT.md — 3-minute presenter script
+- REQUIREMENT_COVERAGE.md — requirement-to-screen coverage map
+- README.md — how to open and demo the package
+- HAPI_APP_REQUIREMENTS.md — source requirements file
+
+Recommended demo path:
+1. Open index.html and start on Dashboard.
+2. Walk through the Birth of a Child journey for Lirie/Arta.
+3. Show AI assistant, document vault, privacy/data-sharing map, audit trail, and government intake dashboard.
+4. Open pitch-deck.html for the final jury story.
+
+Core line to use in the pitch:
+“Një ngjarje, gjithë shteti përgjigjet.” — One event, the whole state responds.
+
+Best,
+Agon

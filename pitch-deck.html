@@ -1,0 +1,331 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hapi · Jury Pitch Deck</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f4f4f4;
+      --surface-warm: #eef5fb;
+      --fg: #161616;
+      --fg-2: #525252;
+      --muted: #6f6f6f;
+      --meta: #8d8d8d;
+      --border: #c6c6c6;
+      --border-soft: #e0e0e0;
+      --accent: #0c4f91;
+      --accent-on: #ffffff;
+      --accent-hover: color-mix(in oklab, var(--accent), black 8%);
+      --accent-active: color-mix(in oklab, var(--accent), black 14%);
+      --civic-warm: #c97456;
+      --success: #24a148;
+      --warn: #f1c21b;
+      --danger: #da1e28;
+      --font-display: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+      --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 16px;
+      --text-lg: 18px;
+      --text-xl: 20px;
+      --text-2xl: 32px;
+      --text-3xl: 42px;
+      --text-4xl: 60px;
+      --leading-body: 1.5;
+      --leading-tight: 1.17;
+      --tracking-display: 0;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --section-y-desktop: 96px;
+      --section-y-tablet: 72px;
+      --section-y-phone: 48px;
+      --radius-sm: 0px;
+      --radius-md: 0px;
+      --radius-lg: 0px;
+      --radius-pill: 9999px;
+      --elev-flat: none;
+      --elev-ring: 0 0 0 1px var(--border);
+      --elev-raised: 0 2px 6px rgba(0, 0, 0, 0.12);
+      --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+      --motion-fast: 110ms;
+      --motion-base: 180ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0.38, 0.9);
+      --container-max: 1312px;
+      --container-gutter-desktop: 32px;
+      --container-gutter-tablet: 24px;
+      --container-gutter-phone: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      background: var(--fg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      overflow: hidden;
+    }
+    .deck-viewport { position: fixed; inset: 0; display: grid; place-items: center; }
+    .deck {
+      width: 1920px;
+      height: 1080px;
+      position: relative;
+      transform-origin: center;
+      background: var(--bg);
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      padding: 80px 96px;
+      background: var(--bg);
+    }
+    .slide.active { display: grid; animation: fade var(--motion-base) var(--ease-standard); }
+    @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-family: var(--font-display); }
+    h1 { font-size: 92px; line-height: 1.05; font-weight: 300; max-width: 1280px; }
+    h2 { font-size: 64px; line-height: 1.12; font-weight: 300; max-width: 1160px; }
+    h3 { font-size: 32px; line-height: 1.25; font-weight: 600; }
+    p, li { font-size: 28px; line-height: 1.42; }
+    ul { margin: 0; padding-left: 32px; display: grid; gap: 18px; }
+    .eyebrow { font-family: var(--font-mono); color: var(--fg-2); font-size: 18px; letter-spacing: .32px; text-transform: uppercase; margin-bottom: 28px; }
+    .lead { color: var(--fg-2); font-size: 32px; max-width: 980px; margin-top: 32px; }
+    .grid { display: grid; gap: 24px; }
+    .cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .panel { background: var(--surface); padding: 32px; min-height: 220px; }
+    .panel.dark { background: var(--fg); color: var(--surface); }
+    .panel.blue { background: var(--surface-warm); }
+    .tag { display: inline-flex; align-items: center; min-height: 32px; padding: 5px 12px; border-radius: var(--radius-pill); background: var(--surface-warm); color: var(--accent); font-family: var(--font-mono); font-size: 16px; letter-spacing: .32px; text-transform: uppercase; }
+    .metric { font-family: var(--font-display); font-size: 84px; line-height: .95; font-weight: 300; }
+    .caption { color: var(--fg-2); font-family: var(--font-mono); font-size: 18px; letter-spacing: .32px; }
+    .slide-num {
+      position: absolute;
+      right: 48px;
+      bottom: 38px;
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: 18px;
+    }
+    .controls {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 5;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      color: var(--bg);
+      font-family: var(--font-mono);
+      font-size: 12px;
+    }
+    .controls button {
+      border: 1px solid color-mix(in oklab, var(--bg), transparent 70%);
+      background: color-mix(in oklab, var(--fg), transparent 10%);
+      color: var(--bg);
+      min-width: 40px;
+      height: 32px;
+    }
+    .timeline { display: grid; gap: 1px; background: var(--border-soft); border: 1px solid var(--border-soft); }
+    .step { display: grid; grid-template-columns: 56px 1fr 160px; gap: 24px; align-items: center; padding: 20px; background: var(--bg); }
+    .dot { width: 36px; height: 36px; display: grid; place-items: center; background: var(--fg); color: var(--bg); font-family: var(--font-mono); font-size: 16px; }
+    .arch { display: grid; gap: 18px; font-family: var(--font-mono); font-size: 24px; }
+    .arch div { padding: 24px; background: var(--surface); border-left: 4px solid var(--civic-warm); }
+    .final { background: var(--fg); color: var(--surface); align-content: center; }
+    .final h2 { max-width: 1500px; font-size: 76px; }
+    @media print {
+      body { overflow: visible; background: var(--bg); }
+      .deck-viewport { position: static; display: block; }
+      .deck { transform: none !important; width: auto; height: auto; }
+      .slide { position: relative; display: grid !important; width: 1920px; height: 1080px; page-break-after: always; }
+      .controls { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="deck-viewport">
+    <main class="deck" id="deck">
+      <section class="slide active" data-screen-label="01 Title">
+        <div>
+          <p class="eyebrow">JunctionX ITP Prizren · Proactive Government</p>
+          <h1>Hapi · Shtresa proaktive për eKosova</h1>
+          <p class="lead">Një ngjarje, gjithë shteti përgjigjet. One life event, one coordinated state response.</p>
+        </div>
+        <div class="grid cols-3" style="align-self:end;">
+          <div class="panel"><span class="tag">Institutional</span><h3 style="margin-top:24px;">Birth of a Child</h3></div>
+          <div class="panel"><span class="tag">Citizen</span><h3 style="margin-top:24px;">Business Registration</h3></div>
+          <div class="panel"><span class="tag">Automatic</span><h3 style="margin-top:24px;">Turning 18</h3></div>
+        </div>
+        <span class="slide-num">1 / 10</span>
+      </section>
+
+      <section class="slide" data-screen-label="02 Problem">
+        <div>
+          <p class="eyebrow">Problem</p>
+          <h2>Citizens are forced to understand government structure before receiving entitlements.</h2>
+        </div>
+        <div class="grid cols-3" style="align-self:end;">
+          <div class="panel"><div class="metric">23</div><p class="caption">institution interactions per birth journey today</p></div>
+          <div class="panel"><div class="metric">18</div><p class="caption">paper forms per typical birth journey</p></div>
+          <div class="panel"><div class="metric">6-8</div><p class="caption">weeks until all birth benefits are active</p></div>
+        </div>
+        <span class="slide-num">2 / 10</span>
+      </section>
+
+      <section class="slide" data-screen-label="03 Solution">
+        <div>
+          <p class="eyebrow">Solution</p>
+          <h2>Hapi turns eKosova from a portal of services into an orchestrator of life events.</h2>
+          <p class="lead">Detect or start the event, create the journey, route institutions, prepare documents, notify citizens, ask only when a choice or consent is needed.</p>
+        </div>
+        <div class="arch" style="align-self:end;">
+          <div>LIFE EVENT → JOURNEY CREATED → INSTITUTIONS ROUTED</div>
+          <div>SERVICES ACTIVATED → DOCUMENTS GENERATED → DEADLINE SHIELD</div>
+          <div>CITIZEN CONFIRMS ONLY CHOICES / CONSENT → AUDIT TRAIL PERSISTED</div>
+        </div>
+        <span class="slide-num">3 / 10</span>
+      </section>
+
+      <section class="slide" data-screen-label="04 V1 Coverage">
+        <div>
+          <p class="eyebrow">v1 coverage</p>
+          <h2>Three journeys prove the engine generalizes.</h2>
+        </div>
+        <div class="grid cols-3" style="align-self:center;">
+          <div class="panel blue"><span class="tag">L01</span><h3>Birth of a Child</h3><p>9 services · 5 institutions · 8 documents · institutional trigger.</p></div>
+          <div class="panel"><span class="tag">L09</span><h3>Registering a Business</h3><p>9 services · 5 institutions · 10 documents · citizen-initiated trigger.</p></div>
+          <div class="panel"><span class="tag">L10</span><h3>Turning 18</h3><p>7 services · 5 institutions · 6 documents · automatic trigger.</p></div>
+        </div>
+        <span class="slide-num">4 / 10</span>
+      </section>
+
+      <section class="slide" data-screen-label="05 Birth Demo">
+        <div>
+          <p class="eyebrow">Demo story</p>
+          <h2>Lirie gives birth to Arta in Prizren. The state coordinates itself.</h2>
+        </div>
+        <div class="timeline" style="align-self:end;">
+          <div class="step"><span class="dot">1</span><p>Hospital sends digital birth notification.</p><span class="caption">HRP</span></div>
+          <div class="step"><span class="dot">2</span><p>Civil Registry verifies identity and issues certificate.</p><span class="caption">RC</span></div>
+          <div class="step"><span class="dot">3</span><p>MPMS prepares child benefit and maternity leave.</p><span class="caption">MPMS</span></div>
+          <div class="step"><span class="dot">4</span><p>MSH schedules vaccination and first pediatric checkup.</p><span class="caption">MSH</span></div>
+          <div class="step"><span class="dot">5</span><p>Lirie only confirms IBAN, QMF, contact, and consent.</p><span class="caption">Citizen</span></div>
+        </div>
+        <span class="slide-num">5 / 10</span>
+      </section>
+
+      <section class="slide" data-screen-label="06 AI Advantage">
+        <div>
+          <p class="eyebrow">AI advantage</p>
+          <h2>Albanian guidance that knows the journey, not generic chatbot answers.</h2>
+        </div>
+        <div class="grid cols-2" style="align-self:center;">
+          <div class="panel"><h3>Context-aware</h3><p>Active journeys, pending actions, ready documents, and notifications are available as scoped context.</p></div>
+          <div class="panel"><h3>Guardrailed</h3><p>No fictional institutions, no invented laws or deadlines, no binding legal advice. If uncertain, it routes to the institution.</p></div>
+          <div class="panel"><h3>Albanian-first</h3><p>Default responses in Albanian, with jury-friendly English labels in the prototype.</p></div>
+          <div class="panel"><h3>Only ask when needed</h3><p>The assistant tells Lirie what she must choose, not what the state already knows.</p></div>
+        </div>
+        <span class="slide-num">6 / 10</span>
+      </section>
+
+      <section class="slide" data-screen-label="07 Trust Privacy">
+        <div>
+          <p class="eyebrow">Trust and privacy</p>
+          <h2>Proactive government only works when transparency is visible.</h2>
+        </div>
+        <div class="grid cols-3" style="align-self:center;">
+          <div class="panel"><h3>Data map</h3><p>"Ku shkojnë të dhënat e mia?" shows which data goes to which institution and why.</p></div>
+          <div class="panel"><h3>Document provenance</h3><p>Official-looking documents include e-stamp, institution, issue date, and SHA fingerprint.</p></div>
+          <div class="panel"><h3>Append-only audit</h3><p>Every state change records actor, timestamp, action, and structured details.</p></div>
+        </div>
+        <span class="slide-num">7 / 10</span>
+      </section>
+
+      <section class="slide" data-screen-label="08 Architecture">
+        <div>
+          <p class="eyebrow">Architecture</p>
+          <h2>One orchestration engine, many institution adapters.</h2>
+        </div>
+        <div class="arch" style="align-self:center;">
+          <div>Citizen UI + Government UI + AI Assistant route</div>
+          <div>Journey Orchestration Engine: createJourney, verifyJourney, advanceStep</div>
+          <div>Institution Routing & Adapters: eKosova SSO, Civil Registry, ARBK, ATK, Hospital systems</div>
+          <div>Documents, notifications, audit logs, and case management share the same journey model</div>
+        </div>
+        <span class="slide-num">8 / 10</span>
+      </section>
+
+      <section class="slide" data-screen-label="09 Impact Metrics">
+        <div>
+          <p class="eyebrow">Impact after pilot year</p>
+          <h2>The target is not more digitized forms. It is fewer citizen burdens.</h2>
+        </div>
+        <div class="grid cols-3" style="align-self:end;">
+          <div class="panel"><div class="metric">≤7d</div><p class="caption">event to all services active</p></div>
+          <div class="panel"><div class="metric">≤5</div><p class="caption">citizen-institution interactions per life event</p></div>
+          <div class="panel"><div class="metric">60%</div><p class="caption">reduction in missed statutory deadlines</p></div>
+          <div class="panel"><div class="metric">70%</div><p class="caption">reduction in double-data-entry</p></div>
+          <div class="panel"><div class="metric">80%</div><p class="caption">positive citizen satisfaction target</p></div>
+          <div class="panel"><div class="metric">99.5%</div><p class="caption">monthly uptime target</p></div>
+        </div>
+        <span class="slide-num">9 / 10</span>
+      </section>
+
+      <section class="slide final" data-screen-label="10 Ask Roadmap">
+        <div>
+          <p class="eyebrow" style="color: var(--border);">Ask / roadmap</p>
+          <h2>Approve a Prizren pilot for Birth, Business Registration, and Turning 18, then extend the catalog through eKosova.</h2>
+          <p class="lead" style="color: var(--border-soft); max-width: 1320px;">Citizens should not have to understand the structure of government to receive what they are entitled to.</p>
+        </div>
+        <span class="slide-num" style="color: var(--border);">10 / 10</span>
+      </section>
+    </main>
+  </div>
+
+  <div class="controls" aria-label="Deck controls">
+    <button id="prev" aria-label="Previous slide">←</button>
+    <span id="counter">1 / 10</span>
+    <button id="next" aria-label="Next slide">→</button>
+  </div>
+
+  <script>
+    const deck = document.getElementById('deck');
+    const slides = Array.from(document.querySelectorAll('.slide'));
+    const counter = document.getElementById('counter');
+    let current = Number(localStorage.getItem('hapiDeckSlide') || '0');
+
+    function fitDeck() {
+      const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+      deck.style.transform = `scale(${scale})`;
+    }
+    function show(index) {
+      current = Math.max(0, Math.min(slides.length - 1, index));
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      counter.textContent = `${current + 1} / ${slides.length}`;
+      localStorage.setItem('hapiDeckSlide', String(current));
+    }
+    document.getElementById('prev').addEventListener('click', () => show(current - 1));
+    document.getElementById('next').addEventListener('click', () => show(current + 1));
+    window.addEventListener('resize', fitDeck);
+    window.addEventListener('keydown', (event) => {
+      if (['ArrowRight', 'PageDown', ' '].includes(event.key)) show(current + 1);
+      if (['ArrowLeft', 'PageUp'].includes(event.key)) show(current - 1);
+      if (event.key === 'Home') show(0);
+      if (event.key === 'End') show(slides.length - 1);
+    });
+    fitDeck();
+    show(current);
+  </script>
+</body>
+</html>

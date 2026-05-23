@@ -1,0 +1,1528 @@
+<!doctype html>
+<html lang="sq">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Hapi · Shtresa proaktive për eKosova</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --surface: #f3f5f8;
+      --surface-warm: #eaf3ff;
+      --fg: #0d1b3d;
+      --fg-2: #40506a;
+      --muted: #6b778c;
+      --meta: #8a95a6;
+      --border: #c9d6e6;
+      --border-soft: #e0e4e7;
+      --accent: #1e4fae;
+      --accent-on: #ffffff;
+      --accent-hover: color-mix(in oklab, var(--accent), black 8%);
+      --accent-active: color-mix(in oklab, var(--accent), black 14%);
+      --secondary-blue: #3882f6;
+      --civic-warm: #f2b705;
+      --planned: #c97400;
+      --planned-bg: #fff8e7;
+      --planned-border: #f4d78a;
+      --navy-dark: #0d1b3d;
+      --success: #24a148;
+      --warn: #f1c21b;
+      --danger: #b91c1c;
+      --font-display: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+      --font-body: "IBM Plex Sans", "Helvetica Neue", Arial, sans-serif;
+      --font-mono: "IBM Plex Mono", "SF Mono", Menlo, monospace;
+      --text-xs: 12px;
+      --text-sm: 14px;
+      --text-base: 16px;
+      --text-lg: 18px;
+      --text-xl: 20px;
+      --text-2xl: 32px;
+      --text-3xl: 42px;
+      --text-4xl: 60px;
+      --leading-body: 1.5;
+      --leading-tight: 1.17;
+      --tracking-display: 0;
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 12px;
+      --space-4: 16px;
+      --space-5: 20px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-12: 48px;
+      --section-y-desktop: 96px;
+      --section-y-tablet: 72px;
+      --section-y-phone: 48px;
+      --radius-sm: 0px;
+      --radius-md: 0px;
+      --radius-lg: 0px;
+      --radius-pill: 9999px;
+      --elev-flat: none;
+      --elev-ring: 0 0 0 1px var(--border);
+      --elev-raised: 0 2px 6px rgba(0, 0, 0, 0.12);
+      --focus-ring: 0 0 0 2px var(--bg), 0 0 0 4px var(--accent);
+      --motion-fast: 110ms;
+      --motion-base: 180ms;
+      --ease-standard: cubic-bezier(0.2, 0, 0.38, 0.9);
+      --container-max: 1312px;
+      --container-gutter-desktop: 32px;
+      --container-gutter-tablet: 24px;
+      --container-gutter-phone: 16px;
+    }
+
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      line-height: var(--leading-body);
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    button, input, select, textarea { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, p { margin: 0; }
+    h1, h2, h3 { font-family: var(--font-display); text-wrap: balance; }
+    p { text-wrap: pretty; }
+    .app-shell { min-height: 100vh; display: grid; grid-template-columns: 280px 1fr; background: var(--bg); }
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      background: linear-gradient(180deg, #0d1b3d 0%, #123f8f 100%);
+      color: var(--surface);
+      padding: var(--space-4);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-6);
+    }
+    .brand { display: grid; gap: var(--space-2); padding-bottom: var(--space-4); border-bottom: 1px solid rgba(255,255,255,.18); }
+    .brand-mark { display: flex; align-items: center; gap: var(--space-3); }
+    .brand-logo {
+      inline-size: 52px;
+      block-size: 52px;
+      flex: 0 0 auto;
+      border-radius: 14px;
+      background-image: url("ChatGPT Image May 23, 2026, 12_33_36 AM.png");
+      background-size: 298px auto;
+      background-position: 79.5% 15.6%;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,.24), 0 10px 24px rgba(0,0,0,.18);
+    }
+    .topbar-logo {
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      background-image: url("ChatGPT Image May 23, 2026, 12_33_36 AM.png");
+      background-size: 160px auto;
+      background-position: 79.5% 15.6%;
+      box-shadow: inset 0 0 0 1px rgba(13,27,61,.1);
+    }
+    .seal {
+      inline-size: 40px;
+      block-size: 40px;
+      display: grid;
+      place-items: center;
+      border: 1px solid rgba(255,255,255,.5);
+      background: rgba(255,255,255,.08);
+      color: var(--surface);
+      font-family: var(--font-mono);
+      font-size: var(--text-xs);
+      letter-spacing: .08em;
+    }
+    .brand h1 { font-size: var(--text-xl); line-height: 1.2; font-weight: 700; }
+    .brand p { color: #d7e4f7; font-size: var(--text-xs); letter-spacing: .32px; }
+    .nav-group { display: grid; gap: var(--space-1); }
+    .nav-title { margin: var(--space-4) 0 var(--space-2); color: var(--border); font-size: var(--text-xs); letter-spacing: .32px; text-transform: uppercase; }
+    .nav-btn {
+      width: 100%;
+      min-height: 40px;
+      padding: var(--space-2) var(--space-3);
+      border: 1px solid transparent;
+      background: transparent;
+      color: var(--border-soft);
+      text-align: left;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-btn:hover, .nav-btn.active { background: rgba(255,255,255,.12); color: var(--bg); }
+    .nav-btn.active { border-left-color: var(--civic-warm); background: rgba(30,79,174,.82); }
+    .nav-kicker { font-family: var(--font-mono); font-size: 10px; color: var(--meta); }
+    .sidebar-foot { margin-top: auto; padding-top: var(--space-4); border-top: 1px solid rgba(255,255,255,.18); font-size: var(--text-xs); color: #d8e6f5; }
+    .main { min-width: 0; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+      padding: 0 var(--space-8);
+      background: rgba(255,255,255,.96);
+      border-bottom: 1px solid var(--border-soft);
+      backdrop-filter: blur(10px);
+    }
+    .topbar-title { display: flex; align-items: center; gap: 12px; }
+    .crumb { color: var(--fg-2); font-size: var(--text-sm); letter-spacing: .16px; }
+    .toolbar { display: flex; gap: var(--space-2); align-items: center; }
+    .notification-wrap { position: relative; }
+    .icon-btn {
+      min-width: 40px;
+      min-height: 40px;
+      padding: 0 12px;
+      border: 1px solid var(--border-soft);
+      background: var(--bg);
+      color: var(--accent);
+      display: inline-grid;
+      place-items: center;
+      border-radius: 6px;
+      position: relative;
+      font-weight: 700;
+      letter-spacing: .02em;
+    }
+    .icon-btn:hover { background: var(--surface-warm); border-color: color-mix(in oklab, var(--accent), white 72%); }
+    .notif-count {
+      position: absolute;
+      top: -7px;
+      right: -7px;
+      min-width: 20px;
+      height: 20px;
+      display: grid;
+      place-items: center;
+      padding: 0 5px;
+      border-radius: 999px;
+      background: var(--danger);
+      color: var(--bg);
+      font-size: 11px;
+      font-weight: 700;
+      border: 2px solid var(--bg);
+    }
+    .notif-panel {
+      position: absolute;
+      right: 0;
+      top: calc(100% + 8px);
+      width: min(380px, calc(100vw - 32px));
+      background: var(--bg);
+      border: 1px solid var(--border-soft);
+      box-shadow: 0 18px 42px rgba(15, 23, 42, .16);
+      z-index: 10;
+      display: none;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .notif-panel.open { display: block; animation: scaleIn 260ms cubic-bezier(0.22, 1, 0.36, 1); transform-origin: top right; }
+    .notif-head { padding: var(--space-4); border-bottom: 1px solid var(--border-soft); display: flex; justify-content: space-between; gap: var(--space-3); align-items: center; }
+    .notif-list { max-height: 360px; overflow: auto; }
+    .notif-item { padding: var(--space-4); display: grid; gap: 2px; border-bottom: 1px solid var(--border-soft); background: var(--bg); }
+    .notif-item.new { background: var(--surface-warm); animation: slideDown 360ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .notif-item strong { font-size: var(--text-sm); }
+    .notif-item span { font-size: var(--text-xs); color: var(--fg-2); }
+    .toast-stack { position: fixed; right: 22px; bottom: 22px; display: grid; gap: 10px; z-index: 40; }
+    .toast {
+      background: var(--navy-dark);
+      color: var(--bg);
+      border-left: 4px solid var(--accent);
+      padding: 12px 14px;
+      min-width: min(340px, calc(100vw - 32px));
+      box-shadow: 0 14px 32px rgba(15, 23, 42, .2);
+      border-radius: 6px;
+      animation: toastIn 320ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes scaleIn { from { opacity: 0; transform: scale(.94); } to { opacity: 1; transform: scale(1); } }
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes toastIn { from { opacity: 0; transform: translateY(16px) scale(.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+    @keyframes pulseDot { 0%,100% { transform: scale(1); opacity: .58; } 50% { transform: scale(1.45); opacity: 1; } }
+    @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(12,79,145,.34); } 70% { box-shadow: 0 0 0 14px rgba(12,79,145,0); } 100% { box-shadow: 0 0 0 0 rgba(12,79,145,0); } }
+    @keyframes badgePop { 0% { transform: scale(.65); } 60% { transform: scale(1.18); } 100% { transform: scale(1); } }
+    @keyframes checkPop { 0% { transform: scale(.7) rotate(-10deg); } 70% { transform: scale(1.14) rotate(3deg); } 100% { transform: scale(1) rotate(0); } }
+    @keyframes scanFill { from { transform: translateX(-110%); } to { transform: translateX(110%); } }
+    .notif-count.pop { animation: badgePop 400ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .summary-tile.bump { animation: badgePop 520ms cubic-bezier(0.22, 1, 0.36, 1); }
+    #proactiveTrigger { position: relative; }
+    #proactiveTrigger::before {
+      content: "";
+      position: absolute;
+      inset: -3px;
+      border: 2px solid var(--civic-warm);
+      opacity: 0;
+      animation: pulseRing 2.4s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+      pointer-events: none;
+    }
+    #proactiveTrigger:hover::before { opacity: 1; }
+    .content { padding: var(--space-8); max-width: 1440px; margin: 0 auto; }
+    .screen { display: none; animation: enter var(--motion-base) var(--ease-standard); }
+    .screen.active { display: block; }
+    .screen.active .hero-copy,
+    .screen.active .hero-panel,
+    .screen.active .panel,
+    .screen.active .tile,
+    .screen.active .doc {
+      animation: fadeUp 440ms cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    .screen.active .tile:nth-child(2),
+    .screen.active .grid > .panel:nth-child(2) { animation-delay: 60ms; }
+    .screen.active .tile:nth-child(3),
+    .screen.active .grid > .panel:nth-child(3) { animation-delay: 120ms; }
+    .screen.active .grid > .panel:nth-child(4) { animation-delay: 180ms; }
+    @keyframes enter { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(420px, .82fr);
+      gap: var(--space-5);
+      align-items: stretch;
+      margin-bottom: var(--space-6);
+    }
+    .hero-copy { background: linear-gradient(180deg, var(--bg) 0%, var(--surface) 100%); border: 1px solid var(--border-soft); padding: var(--space-8); min-height: 360px; display: flex; flex-direction: column; justify-content: space-between; }
+    .eyebrow { color: var(--accent); font-family: var(--font-mono); font-size: var(--text-xs); letter-spacing: .32px; text-transform: uppercase; margin-bottom: var(--space-4); }
+    .hero h2 { font-size: clamp(42px, 5vw, var(--text-4xl)); line-height: var(--leading-tight); font-weight: 300; max-width: 760px; }
+    .lead { margin-top: var(--space-5); color: var(--fg-2); font-size: var(--text-lg); max-width: 680px; }
+    .hero-panel { border: 1px solid var(--border-soft); background: var(--bg); padding: var(--space-6); display: grid; align-content: space-between; gap: var(--space-6); }
+    .hero-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-3);
+      margin-top: var(--space-6);
+    }
+    .summary-tile {
+      background: #fff;
+      border: 1px solid var(--border-soft);
+      padding: var(--space-4);
+      min-height: 98px;
+    }
+    .summary-tile strong { display: block; color: var(--accent); font-size: var(--text-xl); line-height: 1; }
+    .summary-tile span { display: block; margin-top: 8px; color: var(--fg-2); font-size: var(--text-sm); }
+    .task-list { display: grid; gap: var(--space-3); }
+    .task-item {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: var(--space-4);
+      align-items: center;
+      padding: var(--space-4);
+      background: var(--surface-warm);
+      border-left: 4px solid var(--accent);
+    }
+    .task-item.done { background: color-mix(in oklab, var(--success), white 88%); border-left-color: var(--success); }
+    .task-item h4 { margin: 0; font-size: var(--text-base); }
+    .task-item p { margin-top: 4px; color: var(--fg-2); font-size: var(--text-sm); }
+    .flow-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: var(--space-4); }
+    .btn {
+      min-height: 48px;
+      border: 1px solid transparent;
+      border-radius: var(--radius-md);
+      padding: 14px 48px 14px 15px;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      background: var(--surface);
+      color: var(--fg);
+      transition: background var(--motion-fast) var(--ease-standard), border-color var(--motion-fast) var(--ease-standard);
+    }
+    .btn.primary { background: linear-gradient(135deg, var(--accent), #104292); color: var(--accent-on); border-color: var(--accent); box-shadow: 0 10px 24px rgba(30,79,174,.18); }
+    .btn.primary:hover { background: linear-gradient(135deg, #245fcf, #104292); }
+    .btn.secondary { background: var(--navy-dark); color: var(--bg); }
+    .btn.ghost { background: var(--bg); border-color: var(--border); color: var(--accent); padding-right: 16px; }
+    .btn.ghost:hover { background: var(--surface-warm); border-color: var(--accent); }
+    .btn.small { min-height: 32px; padding: 6px 12px; font-size: var(--text-sm); }
+    .btn:focus-visible, .nav-btn:focus-visible, .chip:focus-visible, input:focus-visible, select:focus-visible { outline: none; box-shadow: var(--focus-ring); }
+    .grid { display: grid; gap: var(--space-4); }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .panel { background: var(--surface); padding: var(--space-5); border-radius: var(--radius-lg); border: 1px solid transparent; }
+    .panel.white { background: var(--bg); border: 1px solid var(--border-soft); }
+    .panel.dark { background: var(--navy-dark); color: var(--surface); }
+    .panel-head { display: flex; justify-content: space-between; gap: var(--space-4); align-items: start; margin-bottom: var(--space-5); }
+    .panel h3 { font-size: var(--text-xl); line-height: 1.4; font-weight: 600; }
+    .muted { color: var(--fg-2); }
+    .small { font-size: var(--text-sm); letter-spacing: .16px; }
+    .caption { color: var(--muted); font-size: var(--text-xs); letter-spacing: .32px; }
+    .mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .tag, .status {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-1);
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      font-size: var(--text-xs);
+      letter-spacing: .32px;
+      background: var(--surface-warm);
+      color: var(--accent);
+      white-space: nowrap;
+    }
+    .tag { border-left: 3px solid var(--civic-warm); }
+    .status.ok { background: #dcfce7; color: #166534; }
+    .status.warn { background: color-mix(in oklab, var(--warn), transparent 70%); color: var(--fg); }
+    .status.danger { background: color-mix(in oklab, var(--danger), transparent 88%); color: var(--danger); }
+    .status.neutral { background: #eef3f8; color: var(--fg-2); }
+    .status.planned { background: var(--planned-bg); color: var(--planned); }
+    .timeline { display: grid; gap: 14px; background: transparent; border: 0; position: relative; }
+    .timeline::before {
+      content: "";
+      position: absolute;
+      left: 30px;
+      top: 18px;
+      bottom: 18px;
+      width: 3px;
+      background: linear-gradient(var(--accent), var(--accent) 62%, var(--planned-border) 62%, var(--planned-border));
+      border-radius: 999px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 58px minmax(0, 1fr) 150px 150px;
+      gap: var(--space-4);
+      align-items: center;
+      padding: var(--space-5);
+      background: var(--bg);
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      position: relative;
+      overflow: hidden;
+      transition: background 260ms var(--ease-standard), box-shadow 260ms var(--ease-standard), transform 260ms var(--ease-standard);
+    }
+    .step::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(12,79,145,.08), transparent);
+      transform: translateX(-110%);
+      pointer-events: none;
+    }
+    .step.completing::before { animation: scanFill 720ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .step.completing { background: #f0f7ff; box-shadow: inset 5px 0 0 var(--accent), 0 16px 38px rgba(12,79,145,.12); transform: translateY(-2px) scale(1.006); }
+    .dot { inline-size: 28px; block-size: 28px; display: grid; place-items: center; border: 1px solid var(--border); font-family: var(--font-mono); font-size: var(--text-xs); background: var(--bg); transition: transform 220ms var(--ease-standard), background 220ms var(--ease-standard), color 220ms var(--ease-standard); }
+    .step.done .dot { background: var(--success); color: var(--bg); border-color: var(--success); animation: checkPop 360ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .step.current .dot { background: var(--accent); color: var(--bg); border-color: var(--accent); animation: pulseRing 1.8s ease-out infinite; }
+    .step.future { background: #fffdf9; border-color: var(--planned-border); }
+    .step.future .dot { background: var(--planned-bg); color: var(--planned); border-color: var(--planned); }
+    .step.future .status { background: var(--planned-bg); color: var(--planned); }
+    .step.future .eyebrow, .step.future strong { color: var(--fg); }
+    .step.demo-pulse {
+      outline: 2px solid color-mix(in oklab, var(--accent), transparent 55%);
+      outline-offset: -2px;
+      animation: pulseCard 900ms var(--ease-standard);
+    }
+    .demo-pulse { animation: pulseCard 900ms cubic-bezier(0.22, 1, 0.36, 1); }
+    @keyframes pulseCard { 0% { background: var(--surface-warm); transform: scale(1); } 35% { transform: scale(1.018); } 100% { background: var(--bg); transform: scale(1); } }
+    .action-strip { display: grid; grid-template-columns: 1fr auto; gap: var(--space-4); align-items: center; padding: var(--space-4); background: var(--surface-warm); border-left: 4px solid var(--accent); }
+    .tile {
+      background: var(--bg);
+      padding: var(--space-5);
+      border-radius: var(--radius-lg);
+      min-height: 168px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border: 1px solid var(--border-soft);
+    }
+    .tile:hover { background: var(--surface-warm); }
+    .tile.flow-card { border: 1px solid transparent; transition: border-color var(--motion-fast) var(--ease-standard), transform var(--motion-fast) var(--ease-standard), background var(--motion-fast) var(--ease-standard); }
+    .tile.flow-card { border-color: var(--border-soft); }
+    .tile.flow-card:hover { border-color: var(--accent); transform: translateY(-1px); }
+    .tile h3 { font-size: var(--text-xl); }
+    .doc {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      padding: var(--space-6);
+      position: relative;
+      min-height: 520px;
+    }
+    .doc::after {
+      content: "RKS";
+      position: absolute;
+      inset: 34% auto auto 18%;
+      font-size: 120px;
+      font-family: var(--font-display);
+      color: color-mix(in oklab, var(--fg), transparent 94%);
+      transform: rotate(-18deg);
+      pointer-events: none;
+    }
+    .doc-head { display: flex; justify-content: space-between; border-bottom: 2px solid var(--fg); padding-bottom: var(--space-4); margin-bottom: var(--space-5); }
+    .stamp { border: 2px solid var(--civic-warm); padding: var(--space-3); color: var(--civic-warm); font-family: var(--font-mono); font-size: var(--text-xs); text-align: center; }
+    .doc.ready-glow { box-shadow: 0 0 0 4px color-mix(in oklab, var(--success), transparent 84%), 0 18px 45px rgba(21,128,61,.12); animation: docReady 900ms cubic-bezier(0.22, 1, 0.36, 1); }
+    @keyframes docReady { 0% { transform: scale(.985); } 45% { transform: scale(1.012); } 100% { transform: scale(1); } }
+    .kv { display: grid; grid-template-columns: 180px 1fr; gap: var(--space-2); padding: var(--space-2) 0; border-bottom: 1px solid var(--border-soft); }
+    .doc-flow { display: grid; gap: 16px; margin-top: var(--space-5); }
+    .doc-group-label { display: flex; align-items: center; gap: 12px; color: var(--accent); font-family: var(--font-mono); font-size: var(--text-xs); text-transform: uppercase; letter-spacing: .16em; font-weight: 700; }
+    .doc-group-label::after { content: ""; height: 1px; background: var(--border-soft); flex: 1; }
+    .doc-group-label.future { color: var(--planned); }
+    .doc-card {
+      display: grid;
+      grid-template-columns: 44px minmax(0, 1fr) auto;
+      gap: 14px;
+      align-items: start;
+      padding: 16px;
+      border: 1px solid var(--border-soft);
+      border-radius: 14px;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      transition: transform 180ms var(--ease-standard), box-shadow 180ms var(--ease-standard), border-color 180ms var(--ease-standard);
+    }
+    .doc-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, transparent, rgba(12,79,145,.07), transparent);
+      transform: translateX(-110%);
+      pointer-events: none;
+    }
+    .doc-card.demo-pulse::before { animation: scanFill 760ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .doc-card:hover { transform: translateY(-1px); box-shadow: 0 14px 34px rgba(12,79,145,.1); border-color: color-mix(in oklab, var(--accent), white 58%); }
+    .doc-card.future { background: #fffdf9; border-color: var(--planned-border); }
+    .doc-card.future .doc-icon { background: var(--planned-bg); color: var(--planned); }
+    .doc-icon { width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--surface-warm); color: var(--accent); font-family: var(--font-mono); font-weight: 700; }
+    .doc-card h4 { margin: 0; font-size: 16px; line-height: 1.25; }
+    .doc-card p { margin-top: 4px; color: var(--fg-2); font-size: var(--text-sm); }
+    .arbk-preview {
+      display: none;
+      margin-top: var(--space-5);
+      border: 1px solid color-mix(in oklab, var(--accent), white 58%);
+      background: linear-gradient(180deg, #fff 0%, var(--surface-warm) 100%);
+      padding: var(--space-5);
+      border-radius: 14px;
+    }
+    .arbk-preview.show { display: block; animation: scaleIn 360ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .summary-grid { display: grid; grid-template-columns: 140px 1fr; gap: 8px 14px; margin-top: 14px; font-size: var(--text-sm); }
+    .summary-grid span:nth-child(odd) { color: var(--muted); }
+    .map-row, .audit-row {
+      display: grid;
+      grid-template-columns: 150px minmax(0, 1fr) 190px;
+      gap: var(--space-4);
+      padding: var(--space-4) 0;
+      border-top: 1px solid var(--border-soft);
+    }
+    .chat { display: grid; gap: var(--space-4); }
+    .bubble { max-width: 760px; padding: var(--space-4); background: var(--surface); }
+    .bubble.user { margin-left: auto; background: var(--surface-warm); }
+    .chips { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+    .chip { border: 1px solid var(--border); background: var(--bg); min-height: 40px; padding: 8px 12px; border-radius: var(--radius-pill); }
+    .chip:hover { background: var(--surface); }
+    .assistant-input { display: grid; grid-template-columns: 1fr auto; gap: var(--space-2); margin-top: var(--space-4); }
+    .assistant-input input, .wizard input, .wizard select {
+      min-height: 48px;
+      border: none;
+      border-bottom: 2px solid var(--border);
+      background: var(--surface);
+      padding: 0 var(--space-4);
+      color: var(--fg);
+    }
+    .assistant-input input:focus, .wizard input:focus, .wizard select:focus { border-bottom-color: var(--accent); }
+    .wizard { display: grid; gap: var(--space-4); }
+    .wizard label { display: grid; gap: 6px; font-size: var(--text-sm); color: var(--fg-2); }
+    .table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+    .table th, .table td { padding: var(--space-3) var(--space-4); border-bottom: 1px solid var(--border-soft); text-align: left; vertical-align: top; }
+    .table th { font-size: var(--text-xs); color: var(--fg-2); letter-spacing: .32px; text-transform: uppercase; font-weight: 400; }
+    .table tr.demo-pulse { animation: pulseCard 900ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .status.demo-pulse, .notif-count:not([hidden]) { animation: badgePop 360ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .metric { font-size: var(--text-3xl); line-height: 1.19; font-weight: 300; font-family: var(--font-display); }
+    .split { display: grid; grid-template-columns: 1.2fr .8fr; gap: var(--space-4); align-items: start; }
+    .mobile-nav { display: none; padding: var(--space-4); background: var(--fg); color: var(--bg); }
+    @media (max-width: 1080px) {
+      .app-shell { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; }
+      .nav-group { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero, .split, .grid.cols-2, .grid.cols-3, .grid.cols-4, .flow-grid { grid-template-columns: 1fr; }
+      .content, .topbar { padding-inline: var(--space-4); }
+      .step, .map-row, .audit-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 640px) {
+      .nav-group { grid-template-columns: 1fr; }
+      .hero-copy { padding: var(--space-5); }
+      .hero h2 { font-size: var(--text-3xl); }
+      .topbar { align-items: start; height: auto; padding-block: var(--space-3); flex-direction: column; }
+      .action-strip, .assistant-input, .hero-summary, .task-item { grid-template-columns: 1fr; }
+      .kv { grid-template-columns: 1fr; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: 1ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Hapi navigation">
+      <div class="brand">
+        <div class="brand-mark">
+          <div class="brand-logo" aria-hidden="true"></div>
+          <div>
+            <h1>Hapi</h1>
+            <p>Shtresa proaktive për eKosova</p>
+          </div>
+        </div>
+        <p>Platforma e ngjarjeve të jetës</p>
+      </div>
+      <div>
+        <p class="nav-title">Qytetari / Citizen</p>
+        <div class="nav-group">
+          <button class="nav-btn active" type="button" data-screen="dashboard">Paneli <span class="nav-kicker">01</span></button>
+          <button class="nav-btn" type="button" data-screen="catalog">Ngjarjet <span class="nav-kicker">02</span></button>
+          <button class="nav-btn" type="button" data-screen="birth">Lindja <span class="nav-kicker">03</span></button>
+          <button class="nav-btn" type="button" data-screen="business">Biznesi <span class="nav-kicker">04</span></button>
+          <button class="nav-btn" type="button" data-screen="turning18">18 vjeç <span class="nav-kicker">05</span></button>
+          <button class="nav-btn" type="button" data-screen="assistant">Asistenti AI <span class="nav-kicker">06</span></button>
+          <button class="nav-btn" type="button" data-screen="documents">Dokumentet <span class="nav-kicker">07</span></button>
+        </div>
+        <p class="nav-title">Shteti / Government</p>
+        <div class="nav-group">
+          <button class="nav-btn" type="button" data-screen="gov">Intake & raste <span class="nav-kicker">08</span></button>
+        </div>
+      </div>
+      <div class="sidebar-foot">
+        <strong>eKosova</strong><br />
+        Shërbime publike të koordinuara.
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="topbar-title">
+          <div class="topbar-logo" aria-hidden="true"></div>
+          <div>
+            <div class="crumb">eKosova / Ngjarjet e Jetës / Hapi</div>
+            <strong id="screenTitle">Paneli i qytetarit</strong>
+          </div>
+        </div>
+        <div class="toolbar">
+          <div class="notification-wrap">
+            <button class="icon-btn" id="notificationBell" type="button" aria-label="Njoftimet" aria-expanded="false">
+              <span aria-hidden="true">●</span>
+              <span class="notif-count" id="notifCount">3</span>
+            </button>
+            <div class="notif-panel" id="notifPanel" role="dialog" aria-label="Njoftimet e Hapit">
+              <div class="notif-head">
+                <strong>Njoftime që po vijnë</strong>
+                <span class="caption">eKosova · Hapi</span>
+              </div>
+              <div class="notif-list" id="notifList">
+                <div class="notif-item">
+                  <strong>Skadimi i pasaportës</strong>
+                  <span>P00485712 skadon më 18.08.2026 · 87 ditë · cakto termin në MPB Prizren.</span>
+                </div>
+                <div class="notif-item">
+                  <strong>Vaksina BCG për Artën</strong>
+                  <span>24.05.2026 · 10:00 · Spitali Rajonal i Prizrenit · 2 ditë.</span>
+                </div>
+                <div class="notif-item">
+                  <strong>Afati i parë tatimor — Krasniqi Digital sh.p.k.</strong>
+                  <span>Deklarata e parë në ATK · 90 ditë nga regjistrimi · rikujtues automatik.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <div class="content">
+        <section class="screen active" id="dashboard" data-title="Paneli i qytetarit" data-od-id="dashboard">
+          <div class="hero">
+            <div class="hero-copy">
+              <div>
+                <p class="eyebrow">Paneli i qytetarit</p>
+                <h2>Mirë se vini, Lirie</h2>
+                <p class="lead">Ngjarja e lindjes për Artën është pranuar nga Spitali Rajonal i Prizrenit. Hapi po koordinon dokumentet, pagesat dhe terminet me institucionet përkatëse.</p>
+                <div class="hero-summary">
+                  <div class="summary-tile"><strong>7/9</strong><span>hapa të nisur nga institucionet</span></div>
+                  <div class="summary-tile"><strong>3</strong><span>dokumente gati për shikim</span></div>
+                  <div class="summary-tile"><strong>2</strong><span>veprime kërkojnë konfirmim</span></div>
+                </div>
+              </div>
+              <div class="chips">
+                <button class="btn primary" type="button" id="proactiveTrigger">⚡ Simulo: ngjarja vjen vetë te qytetari</button>
+                <button class="btn ghost" type="button" data-screen-jump="documents">Shiko dokumentet</button>
+              </div>
+            </div>
+            <div class="hero-panel">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">Veprime të nevojshme</p>
+                  <h3>2 hapa presin konfirmimin tuaj</h3>
+                  <p class="small muted">Të dhënat që shteti i ka tashmë nuk kërkohen përsëri.</p>
+                </div>
+                <span class="status warn">Sot</span>
+              </div>
+              <div class="task-list">
+                <div class="task-item">
+                  <div>
+                    <h4>Pasaporta juaj skadon për 87 ditë</h4>
+                    <p>P00485712 skadon më 18.08.2026. Hapi propozon termin më 26.05.2026 në MPB Prizren.</p>
+                  </div>
+                  <button class="btn primary small" type="button">Cakto termin</button>
+                </div>
+                <div class="task-item">
+                  <div>
+                    <h4>Konfirmo IBAN për pagesën e fëmijës</h4>
+                    <p>Pagesa mujore për Artën fillon më 1 qershor 2026.</p>
+                  </div>
+                  <button class="btn primary small" type="button">Konfirmo</button>
+                </div>
+                <div class="task-item">
+                  <div>
+                    <h4>Zgjidh QMF për kontrollin e parë</h4>
+                    <p>MSH propozon QMF Prizren Qendër; mund ta pranoni ose ndryshoni.</p>
+                  </div>
+                  <button class="btn ghost small" type="button">Zgjidh</button>
+                </div>
+                <div class="task-item done">
+                  <div>
+                    <h4>Certifikata e lindjes</h4>
+                    <p>CL-2026-04781 u krijua dhe është në kasafortën e dokumenteve.</p>
+                  </div>
+                  <span class="status ok">Gati</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flow-grid">
+            <article class="tile flow-card">
+              <span class="tag">Institucional</span>
+              <div><h3>Lindja e fëmijës</h3><p class="small muted">Spitali → Regjistri Civil → MPMS → MSH → KP.</p></div>
+              <button class="btn ghost small" type="button" data-screen-jump="birth" data-flow-entry="birth">Vazhdo</button>
+            </article>
+            <article class="tile flow-card">
+              <span class="tag">Nga qytetari</span>
+              <div><h3>Regjistrimi i biznesit</h3><p class="small muted">Qytetari nis rastin; ARBK dhe ATK marrin vetëm të dhënat e nevojshme.</p></div>
+              <button class="btn ghost small" type="button" data-screen-jump="business" data-flow-entry="business">Nis udhëzuesin</button>
+            </article>
+            <article class="tile flow-card">
+              <span class="tag">Automatik</span>
+              <div><h3>Mbushja 18 vjeç</h3><p class="small muted">Zbulohet nga datëlindja T-30 ditë; të drejtat dhe dokumentet dalin vetë.</p></div>
+              <button class="btn ghost small" type="button" data-screen-jump="turning18" data-flow-entry="turning18">Shiko</button>
+            </article>
+          </div>
+
+          <div class="panel white" style="margin-top: var(--space-6);">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">Mburoja e skadimit të dokumenteve</p>
+                <h3>Hapi monitoron dokumentet tuaja dhe paralajmëron para skadimit</h3>
+                <p class="small muted">Pasaporta, letërnjoftimi, patentë shoferi, leja e qëndrimit dhe certifikatat me afat — të gjitha në një vend.</p>
+              </div>
+              <span class="status warn">2 alarme</span>
+            </div>
+            <table class="table">
+              <thead><tr><th>Dokumenti</th><th>Numri</th><th>Skadon më</th><th>Ditë</th><th>Veprimi i propozuar</th><th>Statusi</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Pasaportë biometrike</td>
+                  <td class="mono">P00485712</td>
+                  <td>18.08.2026</td>
+                  <td class="mono">87</td>
+                  <td>Termin online · MPB Prizren · 25 EUR</td>
+                  <td><span class="status warn">Rinovim i shpejtë</span></td>
+                </tr>
+                <tr>
+                  <td>Patentë shoferi (kat. B)</td>
+                  <td class="mono">PT-2016-99214</td>
+                  <td>02.11.2026</td>
+                  <td class="mono">163</td>
+                  <td>Riprintim me kontroll mjekësor</td>
+                  <td><span class="status warn">Planifiko</span></td>
+                </tr>
+                <tr>
+                  <td>Letërnjoftim</td>
+                  <td class="mono">ID-148265</td>
+                  <td>14.03.2031</td>
+                  <td class="mono">1756</td>
+                  <td>Asnjë veprim</td>
+                  <td><span class="status ok">OK</span></td>
+                </tr>
+                <tr>
+                  <td>Certifikatë e gjendjes martesore</td>
+                  <td class="mono">CM-2025-11488</td>
+                  <td>04.04.2026</td>
+                  <td class="mono">−49</td>
+                  <td>Rilëshohet automatikisht nga RC kur kërkohet</td>
+                  <td><span class="status neutral">Auto-rilëshim</span></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="action-strip" style="margin-top: var(--space-4);">
+              <div><strong>Asistenti i rinovimit</strong><p class="small muted">Pre-mbushim formularësh, propozim terminesh dhe pagesa në një hap. Qytetari konfirmon, Hapi e bën pjesën tjetër.</p></div>
+              <button class="btn primary small" type="button">Aktivizo për të gjitha</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="catalog" data-title="Katalogu i Ngjarjeve të Jetës" data-od-id="catalog">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">Katalogu i ngjarjeve të jetës</p>
+              <h2>Katalogu tregon si nis çdo shërbim: automatik, nga institucioni, ose nga qytetari.</h2>
+            </div>
+            <button class="btn primary" type="button" data-screen-jump="business">Nis një kërkesë</button>
+          </div>
+          <div class="grid cols-3">
+            <article class="tile">
+              <span class="status ok">Aktive</span>
+              <div><h3>Lindja e fëmijës</h3><p class="small muted">9 shërbime, 5 institucione, 8 dokumente. Aktivizohet nga njoftimi i spitalit.</p></div>
+            </article>
+            <article class="tile">
+              <span class="status warn">Gati për nisje</span>
+              <div><h3>Regjistrimi i biznesit</h3><p class="small muted">Wizard 4-hapësh: identiteti, biznesi, pronësia, tatime &amp; banka. ARBK + ATK + KP + BQK.</p></div>
+            </article>
+            <article class="tile">
+              <span class="status neutral">Automatik</span>
+              <div><h3>Mbushja 18 vjeç</h3><p class="small muted">Kontroll ditor i datëlindjes në Regjistrin Civil, T-30 ditë. Përfshin patentë dhe pasaportë.</p></div>
+            </article>
+            <article class="tile">
+              <span class="status warn">Nxitur nga alarmi</span>
+              <div><h3>Rinovim dokumentesh</h3><p class="small muted">Pasaportë, patentë, letërnjoftim, leje qëndrimi. Hapi paralajmëron T-90 ditë.</p></div>
+            </article>
+            <article class="tile">
+              <span class="status neutral">Planifikuar</span>
+              <div><h3>Martesa</h3><p class="small muted">Sinkronizim me KP për lidhje civile, RC për certifikatë, ATK për bashkëfaturim.</p></div>
+            </article>
+            <article class="tile">
+              <span class="status neutral">Planifikuar</span>
+              <div><h3>Vdekja dhe trashëgimia</h3><p class="small muted">Njoftim spitali → RC → noter → ATK. Hapi mbyll detyrimet aktive.</p></div>
+            </article>
+          </div>
+          <div class="panel white" style="margin-top: var(--space-4);">
+            <table class="table">
+              <thead><tr><th>Ngjarja</th><th>Veprimi i qytetarit</th><th>Çfarë Hapi nuk pyet më</th><th>Afati</th></tr></thead>
+              <tbody>
+                <tr><td>Lindja e Artës</td><td>IBAN, QMF, pëlqim</td><td>Emri, NP, vendlindja, data e lindjes</td><td>BCG +10 ditë</td></tr>
+                <tr><td>Krasniqi Digital sh.p.k.</td><td>Emri, forma ligjore, NACE</td><td>Identiteti i pronarit në Regjistrin Civil</td><td>Taksa e parë +90 ditë</td></tr>
+                <tr><td>Era mbush 18</td><td>Kontakt, kanal njoftimi, status</td><td>Datëlindja, shtetësia, llogaria eKosova</td><td>T-30 → T+14 ditë</td></tr>
+              </tbody>
+            </table>
+            <div class="action-strip" style="margin-top: var(--space-4);">
+              <div><strong>Dokumente që dalin vetë</strong><p class="small muted">Kapaciteti juridik, votimi, Trust dhe pasaporta përgatiten në profilin adult.</p></div>
+              <div style="display:grid; gap: var(--space-2);">
+                <span class="status neutral" data-flow-doc="eighteen-voter">Lista votuese në radhë</span>
+                <span class="status neutral" data-flow-doc="eighteen-passport">Pasaporta në radhë</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="birth" data-title="Lindja e Artës" data-od-id="birth">
+          <div class="split">
+            <div class="panel white">
+              <div class="panel-head">
+                <div>
+                  <p class="eyebrow">L01 · INSTITUCIONAL</p>
+                  <h2>Lirie Krasniqi → Arta Krasniqi</h2>
+                  <p class="lead">Spitali Rajonal i Prizrenit dërgoi njoftimin digjital. Regjistri Civil e verifikoi rastin dhe 9 hapa u aktivizuan në një vijë kohore.</p>
+                </div>
+                <span class="status ok">AKTIV</span>
+              </div>
+              <div class="timeline">
+                <div class="step done"><div class="dot">1</div><div><strong>Njoftimi i lindjes nga spitali</strong><p class="small muted">HRP · referenca HRP-2026-1842</p></div><span class="status ok">Përfunduar</span><span class="caption">22.05.2026</span></div>
+                <div class="step done"><div class="dot">2</div><div><strong>Verifikim i të dhënave të lindjes</strong><p class="small muted">RC kontrolloi nënën, fëmijën, datën dhe vendin.</p></div><span class="status ok">Përfunduar</span><span class="caption">4 min</span></div>
+                <div class="step done"><div class="dot">3</div><div><strong>Lëshim i certifikatës së lindjes</strong><p class="small muted">Dokumenti CL-2026-04781 u ruajt në kasafortë.</p></div><span class="status ok">Lëshuar</span><span class="caption">RC</span></div>
+                <div class="step current"><div class="dot">4</div><div><strong>Caktim i numrit personal</strong><p class="small muted">Numri personal për Artën po përgatitet nga Regjistri Civil.</p></div><span class="status warn">Në vazhdim</span><span class="caption">Sot</span></div>
+                <div class="step"><div class="dot">5</div><div><strong>Pagesa për fëmijën</strong><p class="small muted">MPMS pret vetëm konfirmimin e IBAN-it nga Lirie.</p></div><span class="status warn">Veprim i nevojshëm</span><span class="caption">20 EUR/muaj</span></div>
+                <div class="step"><div class="dot">6</div><div><strong>Pushimi i lehonisë</strong><p class="small muted">Aplikimi është përgatitur; Lirie e rishikon para dorëzimit.</p></div><span class="status neutral">Gati</span><span class="caption">9 muaj</span></div>
+                <div class="step future"><div class="dot">7</div><div><strong>Kalendari i vaksinimit</strong><p class="small muted">MSH krijon kalendarin BCG dhe kontrollet pediatrike.</p></div><span class="status planned">Në radhë</span><span class="caption">MSH</span></div>
+                <div class="step future"><div class="dot">8</div><div><strong>Termini i kontrollit të parë</strong><p class="small muted">QMF Prizren Qendër, propozuar automatikisht.</p></div><span class="status planned">+10 ditë</span><span class="caption">Më vonë</span></div>
+                <div class="step future"><div class="dot">9</div><div><strong>Rikujtues për kopsht</strong><p class="small muted">Komuna e Prizrenit planifikon rikujtimin +2 vite.</p></div><span class="status planned">I caktuar</span><span class="caption">2028</span></div>
+              </div>
+            </div>
+            <div class="grid">
+              <div class="panel">
+                <p class="eyebrow">Pyet vetëm kur duhet</p>
+                <h3>Çfarë kërkohet nga Lirie?</h3>
+                <table class="table"><tbody>
+                  <tr><td>IBAN</td><td><span class="status warn">Në pritje</span></td></tr>
+                  <tr><td>QMF e preferuar</td><td><span class="status warn">Në pritje</span></td></tr>
+                  <tr><td>Kontakt</td><td><span class="status ok">Konfirmuar</span></td></tr>
+                  <tr><td>Emri / NP / vendlindja</td><td><span class="status ok">Nuk pyetet</span></td></tr>
+                </tbody></table>
+                <div style="margin-top: var(--space-4); display: flex; justify-content: flex-end;">
+                  <button class="btn ghost small" type="button" data-screen-jump="privacy">→ Ku shkojnë të dhënat e mia?</button>
+                </div>
+              </div>
+              <div class="panel dark">
+                <p class="eyebrow" style="color: var(--border);">Institucionet</p>
+                <h3>HRP, RC, MPMS, MSH, KP</h3>
+                <p class="small" style="color: var(--border-soft);">Çdo institucion sheh hapin e vet dhe gjurmën e auditimit për rastin. Qytetari sheh pronarin institucional në çdo hap.</p>
+              </div>
+              <div class="panel">
+                <div class="panel-head">
+                  <div>
+                    <p class="eyebrow">Ngjarja e ardhshme</p>
+                    <h3>Vaksina BCG</h3>
+                    <p class="small muted">24 maj 2026 · 10:00 · Spitali Rajonal i Prizrenit</p>
+                  </div>
+                  <span class="status neutral">I caktuar</span>
+                </div>
+                <p class="small muted">Ky rikujtues shfaqet automatikisht pasi MSH krijon kalendarin e vaksinimit.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="business" data-title="Regjistrimi i biznesit" data-od-id="business">
+          <div class="split">
+            <div class="panel white">
+              <p class="eyebrow">L09 · NGA QYTETARI</p>
+              <h2>Regjistro biznes pa i vizituar 5 institucione.</h2>
+              <p class="lead">Drilon nis Krasniqi Digital sh.p.k. Identiteti, NP dhe adresa merren nga RC. Hapi pyet vetëm për të dhënat e biznesit.</p>
+              <div class="wizard" style="margin-top: var(--space-6);">
+                <label>Emri i biznesit <input value="Krasniqi Digital sh.p.k." /></label>
+                <label>Forma ligjore
+                  <select>
+                    <option>Sh.p.k. · Shoqëri me përgjegjësi të kufizuar</option>
+                    <option>B.I. · Biznes individual</option>
+                    <option>Sh.a. · Shoqëri aksionare</option>
+                    <option>Sh.k.m. · Shoqëri kolektive</option>
+                  </select>
+                </label>
+                <label>Kapitali themelues (EUR) <input value="1.00" /></label>
+                <label>Aktiviteti primar / NACE <input value="62.01 · Zhvillim softueri" /></label>
+                <label>Adresa e selisë <input value="Rr. Remzi Ademaj 23, 20000 Prizren" /></label>
+                <label>Email zyrtar <input value="info@krasniqidigital.com" /></label>
+                <label>Regjistrim TVSH
+                  <select>
+                    <option>Jo · nën pragun 30,000 EUR/vit</option>
+                    <option>Po · regjistrim vullnetar</option>
+                  </select>
+                </label>
+                <label>Llogaria bankare (BQK propozon)
+                  <select>
+                    <option>ProCredit Bank Kosova</option>
+                    <option>Raiffeisen Bank Kosovo</option>
+                    <option>NLB Banka</option>
+                    <option>TEB Sh.A.</option>
+                    <option>Banka Ekonomike</option>
+                  </select>
+                </label>
+                <button class="btn primary" type="button" data-generate-arbk>Gjenero përmbledhje për ARBK</button>
+                <div class="arbk-preview" id="arbkPreview">
+                  <p class="eyebrow">Pamje paraprake për ARBK · ATK · KP · BQK</p>
+                  <h3>Përmbledhja u gjenerua</h3>
+                  <div class="summary-grid">
+                    <span>Biznesi</span><strong>Krasniqi Digital sh.p.k.</strong>
+                    <span>Forma</span><strong>Sh.p.k.</strong>
+                    <span>Kapitali</span><strong>1.00 EUR</strong>
+                    <span>NACE</span><strong>62.01 · Zhvillim softueri</strong>
+                    <span>Adresa</span><strong>Rr. Remzi Ademaj 23, Prizren</strong>
+                    <span>Pronari</span><strong>Drilon Krasniqi · 100% (nga RC)</strong>
+                    <span>TVSH</span><strong>Jo</strong>
+                    <span>Bankë</span><strong>ProCredit Bank Kosova</strong>
+                    <span>Statusi</span><strong>Gati për dërgim në ARBK</strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head">
+                <h3>Përmbledhja e rastit</h3>
+                <span class="status warn" data-journey-status>Skicë</span>
+              </div>
+              <table class="table">
+                <tbody>
+                  <tr><td>RC</td><td>Verifikim identiteti pronari, NP, adresa</td><td class="caption mono">5 min</td></tr>
+                  <tr><td>ARBK</td><td>Kontroll emri, NUB, certifikatë regjistrimi</td><td class="caption mono">~24h</td></tr>
+                  <tr><td>ATK</td><td>Numër fiskal, udhëzim tatimor, afati i parë +90 ditë</td><td class="caption mono">~24h</td></tr>
+                  <tr><td>KP Prizren</td><td>Njoftim komuna për veprimtarinë lokale, leje sipas zonës</td><td class="caption mono">~3 ditë</td></tr>
+                  <tr><td>BQK</td><td>Checklist KYC për llogarinë e zgjedhur</td><td class="caption mono">~5 ditë</td></tr>
+                  <tr><td>UBO</td><td>Regjistrim automatik në Regjistrin e Pronarëve Përfitues</td><td class="caption mono">~24h</td></tr>
+                  <tr><td>MPMS / Trust</td><td>Pre-konfigurim si punëdhënës (aktivizohet me punëtorin e parë)</td><td class="caption mono">më vonë</td></tr>
+                  <tr><td>Doganat</td><td>EORI vetëm nëse zgjidhet import/eksport</td><td class="caption mono">me zgjedhje</td></tr>
+                </tbody>
+              </table>
+              <div class="action-strip" style="margin-top: var(--space-4);">
+                <div><strong>Tarifa zyrtare e regjistrimit</strong><p class="small muted">ARBK Sh.p.k. · 26 EUR (administrativ) + 1 EUR kapital.</p></div>
+                <strong class="mono">27.00 EUR</strong>
+              </div>
+              <div class="action-strip" style="margin-top: var(--space-4);">
+                <div><strong>Mburoja e afateve</strong><p class="small muted">Rikujtues për afatin e parë tatimor +90 ditë dhe deklaratën vjetore.</p></div>
+                <span class="status ok">I aktivizuar</span>
+              </div>
+              <div class="action-strip" style="margin-top: var(--space-4);">
+                <div><strong>Dokumentet e biznesit</strong><p class="small muted">NUB, numri fiskal dhe certifikata e UBO-së krijohen nga kaskada.</p></div>
+                <div style="display:grid; gap: var(--space-2);">
+                  <span class="status neutral" data-flow-doc="business-nub">NUB në radhë</span>
+                  <span class="status neutral" data-flow-doc="business-tax">Numri fiskal në radhë</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="turning18" data-title="Mbushja 18 vjeç" data-od-id="turning18">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">L10 · AUTOMATIK</p>
+              <h2>Era mbush 18: Hapi krijon përmbledhjen para ditëlindjes.</h2>
+              <p class="lead">Regjistri Civil e zbulon automatikisht datëlindjen T-30 ditë. Qytetarja merr të drejtat, dokumentet dhe hapat e ardhshëm në një vend.</p>
+            </div>
+            <span class="status ok">Zbuluar T-30</span>
+          </div>
+          <div class="grid cols-4">
+            <div class="panel"><div class="metric mono">30</div><p class="caption">ditë para aktivizimit</p></div>
+            <div class="panel"><div class="metric mono">8</div><p class="caption">hapa të rastit</p></div>
+            <div class="panel"><div class="metric mono">7</div><p class="caption">dokumente dhe njoftime</p></div>
+            <div class="panel"><div class="metric mono">5</div><p class="caption">institucione</p></div>
+          </div>
+          <div class="panel white" style="margin-top: var(--space-4);">
+            <table class="table">
+              <thead><tr><th>Hapi</th><th>Institucioni</th><th>Statusi</th><th>Çfarë kërkohet nga Era</th></tr></thead>
+              <tbody>
+                <tr><td>Verifikim i të dhënave personale</td><td>RC</td><td><span class="status ok">Përfunduar</span></td><td>Asgjë</td></tr>
+                <tr><td>Kontroll i letërnjoftimit</td><td>MPB</td><td><span class="status ok">Gati</span></td><td>Asgjë</td></tr>
+                <tr><td>Konfirmim adrese</td><td>KP</td><td><span class="status warn">Rishiko</span></td><td>Konfirmo adresën aktuale</td></tr>
+                <tr><td>Llogaria adulte eKosova</td><td>eKosova</td><td><span class="status neutral">I caktuar</span></td><td>Zgjidh metodën e njoftimit</td></tr>
+                <tr><td>Patentë shoferi (kat. B)</td><td>MPB · Drejtoria e Patentave</td><td><span class="status neutral">+30 ditë</span></td><td>Cakto orarin për testin teorik dhe ekzaminimin mjekësor</td></tr>
+                <tr><td>Pasaportë biometrike</td><td>MPB</td><td><span class="status neutral">+14 ditë</span></td><td>Termin për biometrikë (foto + gishtërinj)</td></tr>
+                <tr><td>Udhëzues arsim/punësim</td><td>MASHTI</td><td><span class="status neutral">+14 ditë</span></td><td>Deklaro statusin: studente / e punësuar / e papunë</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+
+        <section class="screen" id="assistant" data-title="Asistenti AI në shqip" data-od-id="assistant">
+          <div class="split">
+            <div class="panel white">
+              <p class="eyebrow">FR-8 · Albanian-first AI</p>
+              <h2>Asistenti përgjigjet me kontekst, por nuk shpik ligje apo afate.</h2>
+              <div class="chat" style="margin-top: var(--space-6);">
+                <div class="bubble user">A duhet ta dërgoj vetë certifikatën e lindjes te MPMS?</div>
+                <div class="bubble"><strong>Hapi AI:</strong> Jo. Certifikata CL-2026-04781 është lëshuar nga Regjistri Civil dhe MPMS e sheh përmes journey-t të lindjes. Ti duhet vetëm të konfirmosh IBAN-in për pagesën dhe të rishikosh aplikimin për pushim të lehonisë.</div>
+                <div class="bubble user">Kur është kontrolli i parë për Artën?</div>
+                <div class="bubble"><strong>Hapi AI:</strong> MSH ka propozuar QMF Prizren Qendër brenda 10 ditëve. Nëse ky QMF nuk të përshtatet, zgjidh një tjetër para datës 01.06.2026.</div>
+              </div>
+              <div class="chips" style="margin-top: var(--space-4);">
+                <button class="chip">Çfarë pret nga unë sot?</button>
+                <button class="chip">Shpjego dokumentet e gatshme</button>
+                <button class="chip">Ku shkojnë të dhënat e mia?</button>
+                <button class="chip">Çfarë ndodh nëse humbas afatin?</button>
+              </div>
+              <div class="assistant-input"><input aria-label="Pyet Hapi AI" value="A mund ta ndryshoj QMF-në?" /><button class="btn primary">Dërgo</button></div>
+            </div>
+            <div class="panel">
+              <h3>Guardrails / kufijtë</h3>
+              <table class="table">
+                <tbody>
+                  <tr><td>Nuk shpik institucione</td><td><span class="status ok">On</span></td></tr>
+                  <tr><td>Nuk jep këshillë ligjore detyruese</td><td><span class="status ok">On</span></td></tr>
+                  <tr><td>Drejton te institucioni kur nuk është i sigurt</td><td><span class="status ok">On</span></td></tr>
+                  <tr><td>Përdor vetëm journey, dokumente dhe njoftime të qytetarit</td><td><span class="status ok">Scoped</span></td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="documents" data-title="Kasaforta e dokumenteve" data-od-id="documents">
+          <div class="split">
+            <div class="doc" id="certificateDoc">
+              <div class="doc-head">
+                <div><p class="caption mono">REPUBLIKA E KOSOVËS · REGJISTRI CIVIL</p><h2>Certifikatë e lindjes</h2></div>
+                <div class="seal" style="background: var(--fg);">RKS</div>
+              </div>
+              <div class="kv"><strong>Referenca</strong><span class="mono">CL-2026-04781</span></div>
+              <div class="kv"><strong>Fëmija</strong><span>Arta Krasniqi</span></div>
+              <div class="kv"><strong>Nëna</strong><span>Lirie Krasniqi · NP ending 4821</span></div>
+              <div class="kv"><strong>Vendi</strong><span>Spitali Rajonal i Prizrenit</span></div>
+              <div class="kv"><strong>Data</strong><span>22.05.2026</span></div>
+              <div class="stamp" style="margin-top: var(--space-6);">
+                E-STAMP · RC PRIZREN<br />
+                Issued 22.05.2026 10:42<br />
+                SHA-256 9F2C-18B7-4AA0-DC91-77E4
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3>Document vault</h3><span class="status ok">8 ready/in progress</span></div>
+              <div class="doc-flow">
+                <div class="doc-group-label">U bë sot</div>
+                <div class="doc-card" data-doc-row="hospital">
+                  <div class="doc-icon">H</div>
+                  <div><p class="eyebrow">Spitali Rajonal</p><h4>Hospital birth notification</h4><p>HRP-2026-1842 · stored in audit trail</p></div>
+                  <span class="status ok">Stored</span>
+                </div>
+                <div class="doc-card" data-doc-row="verification">
+                  <div class="doc-icon">RC</div>
+                  <div><p class="eyebrow">Regjistri Civil</p><h4>Birth verification record</h4><p>Mother, child, date and location verified</p></div>
+                  <span class="status ok">Stored</span>
+                </div>
+                <div class="doc-card" data-doc-row="birth-cert">
+                  <div class="doc-icon">CL</div>
+                  <div><p class="eyebrow">Regjistri Civil</p><h4>Birth certificate</h4><p>Ref: CL-2026-04781 · ready for preview</p></div>
+                  <span class="status ok">Issued</span>
+                </div>
+                <div class="doc-card" data-doc-row="personal-number">
+                  <div class="doc-icon">NP</div>
+                  <div><p class="eyebrow">Regjistri Civil</p><h4>Personal number confirmation</h4><p>NP: 1262060XXXX</p></div>
+                  <span class="status warn">Preparing</span>
+                </div>
+                <div class="doc-card" data-doc-row="benefit">
+                  <div class="doc-icon">€</div>
+                  <div><p class="eyebrow">Ministria e Punës</p><h4>Child benefit decision</h4><p>€20/month · starts 1 June 2026</p></div>
+                  <span class="status neutral">Waiting IBAN</span>
+                </div>
+
+                <div class="doc-group-label future">Vjen më vonë</div>
+                <div class="doc-card future" data-doc-row="vaccine">
+                  <div class="doc-icon">MSH</div>
+                  <div><p class="eyebrow">Ministria e Shëndetësisë</p><h4>Vaccine schedule</h4><p>BCG, first checkup and pediatric reminders</p></div>
+                  <span class="status planned">Queued</span>
+                </div>
+
+                <div class="doc-group-label">Dokumente personale me afat</div>
+                <div class="doc-card" data-doc-row="passport">
+                  <div class="doc-icon">PS</div>
+                  <div><p class="eyebrow">MPB · Pasaporta</p><h4>Pasaportë biometrike</h4><p>P00485712 · skadon 18.08.2026 · termin propozuar 26.05.2026</p></div>
+                  <span class="status warn">Renew · 87d</span>
+                </div>
+                <div class="doc-card" data-doc-row="driving">
+                  <div class="doc-icon">PT</div>
+                  <div><p class="eyebrow">MPB · Drejtoria e Patentave</p><h4>Patentë shoferi (kat. B)</h4><p>PT-2016-99214 · skadon 02.11.2026 · kërkon kontroll mjekësor</p></div>
+                  <span class="status warn">Renew · 163d</span>
+                </div>
+                <div class="doc-card" data-doc-row="id-card">
+                  <div class="doc-icon">LN</div>
+                  <div><p class="eyebrow">MPB</p><h4>Letërnjoftim</h4><p>ID-148265 · skadon 14.03.2031 · asnjë veprim</p></div>
+                  <span class="status ok">Valid</span>
+                </div>
+              </div>
+              <button class="btn primary" data-download-cert style="margin-top: var(--space-4);">Print / Download HTML</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="privacy" data-title="Ku shkojnë të dhënat e mia?" data-od-id="privacy">
+          <div class="panel white">
+            <p class="eyebrow">Privacy · data minimization</p>
+            <h2>Ku shkojnë të dhënat e mia?</h2>
+            <p class="lead">Hapi tregon saktësisht cilat të dhëna ndahen, me kë, pse, dhe nëse qytetari ka dhënë consent.</p>
+            <div style="margin-top: var(--space-6);">
+              <div class="map-row"><strong>Regjistri Civil</strong><span>Emri i fëmijës, data/vendi i lindjes, prindi, referenca e spitalit</span><span class="status ok">Legal basis</span></div>
+              <div class="map-row"><strong>MPMS</strong><span>Certifikata e lindjes, NP e prindit, IBAN vetëm pas konfirmimit</span><span class="status warn">Consent for IBAN</span></div>
+              <div class="map-row"><strong>MSH</strong><span>Mosha e fëmijës, vendbanimi, QMF e zgjedhur</span><span class="status warn">Citizen choice</span></div>
+              <div class="map-row"><strong>Komuna e Prizrenit</strong><span>Vetëm rikujtuesi për kopsht, i planifikuar +2 vite</span><span class="status neutral">Future</span></div>
+              <div class="map-row"><strong>MPB (Pasaporta &amp; Patentë)</strong><span>Numri i dokumentit, data e skadimit, foto biometrike — vetëm gjatë rinovimit</span><span class="status warn">Active during renewal</span></div>
+              <div class="map-row"><strong>ARBK</strong><span>Emri, forma ligjore, NACE, kapitali, UBO — vetëm për regjistrim biznesi</span><span class="status warn">Business only</span></div>
+              <div class="map-row"><strong>ATK</strong><span>Numri fiskal, statusi i TVSH-së, xhiroja agreguar — pa transaksione individuale</span><span class="status warn">Business only</span></div>
+              <div class="map-row"><strong>BQK</strong><span>Vetëm sinjali për KYC te banka e zgjedhur · nuk ndahen bilancet</span><span class="status warn">Consent at choice</span></div>
+              <div class="map-row"><strong>AI assistant</strong><span>Pyetja dhe konteksti minimal i journey-t; jo të dhëna jashtë rastit</span><span class="status ok">Scoped</span></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="gov" data-title="Government intake & case management" data-od-id="gov">
+          <div class="panel-head">
+            <div><p class="eyebrow">Gov staff · Erza Aliu</p><h2>Një inbox për rastet hyrëse, verifikim dhe avancim hapash.</h2></div>
+            <button class="btn secondary">Verify selected case</button>
+          </div>
+          <div class="grid cols-4">
+            <div class="panel"><div class="metric mono">14</div><p class="caption">incoming cases</p></div>
+            <div class="panel"><div class="metric mono">4m</div><p class="caption">median verification</p></div>
+            <div class="panel"><div class="metric mono">5</div><p class="caption">institutions in pilot</p></div>
+            <div class="panel"><div class="metric mono">0</div><p class="caption">duplicate entries</p></div>
+          </div>
+          <div class="panel white" style="margin-top: var(--space-4);">
+            <table class="table">
+              <thead><tr><th>Case</th><th>Citizen</th><th>Trigger</th><th>Checklist</th><th>Status</th><th>Next owner</th></tr></thead>
+              <tbody>
+                <tr><td class="mono">CASE-L01-1842</td><td>Lirie Krasniqi / Arta</td><td>HRP digital birth notification</td><td>Identity, duplicate, consent, hospital ref</td><td><span class="status warn">VERIFYING</span></td><td>RC Prizren</td></tr>
+                <tr><td class="mono">CASE-L09-0431</td><td>Drilon Krasniqi</td><td>Citizen wizard (Krasniqi Digital sh.p.k.)</td><td>Name, NUB, UBO, NACE, capital, address</td><td><span class="status neutral">INCOMING</span></td><td>ARBK</td></tr>
+                <tr><td class="mono">CASE-L10-7710</td><td>Era Krasniqi</td><td>DOB scan T-30</td><td>Citizenship, DOB, address, license eligibility</td><td><span class="status ok">ACTIVE</span></td><td>MPB</td></tr>
+                <tr><td class="mono">CASE-RNW-2261</td><td>Lirie Krasniqi</td><td>Passport expiry T-90 alert</td><td>Identity, photo capture slot, fee payment</td><td><span class="status warn">SCHEDULED</span></td><td>MPB Prizren</td></tr>
+                <tr><td class="mono">CASE-RNW-2188</td><td>Drilon Krasniqi</td><td>Driving license expiry T-163</td><td>Medical exam, photo, category check</td><td><span class="status neutral">QUEUED</span></td><td>MPB · Patentat</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="grid cols-3" style="margin-top: var(--space-4);">
+            <div class="panel"><h3>Verification checklist</h3><p class="small muted">A journey moves from PENDING_VERIFICATION to ACTIVE only after staff completes the checklist.</p></div>
+            <div class="panel"><h3>Scoped institution view</h3><p class="small muted">Staff sees routed steps for their institution, with cross-institution audit visibility.</p></div>
+            <div class="panel"><h3>Adapter-ready intake</h3><p class="small muted">The v1 web intake mirrors the future authenticated POST /api/intake/{institution-id} contract.</p></div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const titles = document.getElementById('screenTitle');
+    const screens = Array.from(document.querySelectorAll('.screen'));
+    const buttons = Array.from(document.querySelectorAll('.nav-btn'));
+    const notificationBell = document.getElementById('notificationBell');
+    const notifPanel = document.getElementById('notifPanel');
+    const notifList = document.getElementById('notifList');
+    const notifCount = document.getElementById('notifCount');
+    const certificateDoc = document.getElementById('certificateDoc');
+    const flowIds = ['birth', 'business', 'turning18'];
+    let timers = [];
+    let notifications = [];
+
+    function showScreen(id) {
+      screens.forEach((screen) => screen.classList.toggle('active', screen.id === id));
+      buttons.forEach((button) => button.classList.toggle('active', button.dataset.screen === id));
+      const active = document.getElementById(id);
+      titles.textContent = active?.dataset.title || 'Hapi';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      if (flowIds.includes(id)) startFlowDemo(id);
+    }
+
+    document.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target : event.target.parentElement;
+      if (!target) return;
+
+      const jump = target.closest('[data-screen-jump]');
+      if (jump) {
+        event.preventDefault();
+        showScreen(jump.dataset.screenJump);
+        return;
+      }
+
+      if (target.closest('[data-generate-arbk]')) {
+        event.preventDefault();
+        showArbkPreview();
+        return;
+      }
+
+      const nav = target.closest('.nav-btn[data-screen]');
+      if (nav) {
+        event.preventDefault();
+        showScreen(nav.dataset.screen);
+        return;
+      }
+
+      if (target.closest('#notificationBell')) {
+        event.preventDefault();
+        const open = notifPanel.classList.toggle('open');
+        notificationBell.setAttribute('aria-expanded', String(open));
+      }
+    });
+    document.addEventListener('click', (event) => {
+      const target = event.target instanceof Element ? event.target : event.target.parentElement;
+      if (!target || !target.closest('.notification-wrap')) {
+        notifPanel.classList.remove('open');
+        notificationBell.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    document.querySelector('[data-download-cert]')?.addEventListener('click', downloadCertificate);
+
+    function showArbkPreview() {
+      const preview = document.getElementById('arbkPreview');
+      if (!preview) return;
+      preview.classList.remove('show');
+      void preview.offsetWidth;
+      preview.classList.add('show');
+      const summary = document.querySelector('#business .panel .status');
+      if (summary) {
+        summary.className = 'status ok demo-pulse';
+        summary.textContent = 'Ready';
+        setTimeout(() => summary.classList.remove('demo-pulse'), 900);
+      }
+      addNotification('Përmbledhja për ARBK u gjenerua', 'Krasniqi Digital sh.p.k. është gati për dërgim.');
+    }
+
+    function clearDemoTimers() {
+      timers.forEach(clearTimeout);
+      timers = [];
+    }
+
+    function delay(ms, fn) {
+      const timer = setTimeout(fn, ms);
+      timers.push(timer);
+    }
+
+    function status(label, kind = 'neutral') {
+      return `<span class="status ${kind}">${label}</span>`;
+    }
+
+    function setStep(sectionId, index, label, kind = 'ok') {
+      const step = document.querySelector(`#${sectionId} .step:nth-child(${index})`);
+      if (!step) return;
+      step.classList.remove('current', 'future', 'done');
+      step.classList.add('completing', 'demo-pulse');
+      const statusEl = step.querySelector('.status');
+      if (statusEl) {
+        statusEl.className = 'status warn demo-pulse';
+        statusEl.textContent = 'Processing';
+      }
+      setTimeout(() => {
+        step.classList.remove('completing');
+        step.classList.add('done');
+        if (statusEl) {
+          statusEl.className = `status ${kind} demo-pulse`;
+          statusEl.textContent = label;
+        }
+      }, 520);
+      setTimeout(() => {
+        step.classList.remove('demo-pulse');
+        statusEl?.classList.remove('demo-pulse');
+      }, 1200);
+    }
+
+    function setTableStatus(sectionId, rowIndex, label, kind = 'ok') {
+      const row = document.querySelector(`#${sectionId} tbody tr:nth-child(${rowIndex})`);
+      const statusEl = row?.querySelector('.status');
+      if (!statusEl) return;
+      row.classList.add('demo-pulse');
+      statusEl.className = `status ${kind}`;
+      statusEl.textContent = label;
+      statusEl.classList.add('demo-pulse');
+      setTimeout(() => {
+        row.classList.remove('demo-pulse');
+        statusEl.classList.remove('demo-pulse');
+      }, 900);
+    }
+
+    function setDocStatus(key, label, kind = 'ok') {
+      const row = document.querySelector(`[data-doc-row="${key}"]`);
+      const statusEl = row?.querySelector('.status');
+      if (!statusEl) return;
+      row.classList.add('demo-pulse');
+      statusEl.className = `status ${kind}`;
+      statusEl.textContent = label;
+      statusEl.classList.add('demo-pulse');
+      if (kind === 'ok') certificateDoc?.classList.add('ready-glow');
+      setTimeout(() => {
+        row.classList.remove('demo-pulse');
+        statusEl.classList.remove('demo-pulse');
+      }, 900);
+    }
+
+    function setFlowDoc(key, label, kind = 'ok') {
+      const statusEl = document.querySelector(`[data-flow-doc="${key}"]`);
+      if (!statusEl) return;
+      statusEl.className = `status ${kind}`;
+      statusEl.textContent = label;
+      statusEl.classList.add('demo-pulse');
+      setTimeout(() => statusEl.classList.remove('demo-pulse'), 900);
+    }
+
+    function addNotification(title, body) {
+      showToast(title);
+    }
+
+    function showToast(message) {
+      let stack = document.querySelector('.toast-stack');
+      if (!stack) {
+        stack = document.createElement('div');
+        stack.className = 'toast-stack';
+        document.body.appendChild(stack);
+      }
+      const toast = document.createElement('div');
+      toast.className = 'toast';
+      toast.textContent = message;
+      stack.appendChild(toast);
+      setTimeout(() => toast.remove(), 2600);
+    }
+
+    function resetBirthDemo() {
+      const states = [
+        ['Completed', 'ok', 'done'],
+        ['Completed', 'ok', 'done'],
+        ['Issued', 'ok', 'done'],
+        ['In progress', 'warn', 'current'],
+        ['Action needed', 'warn', ''],
+        ['Ready', 'neutral', ''],
+        ['Queued', 'planned', 'future'],
+        ['+10 days', 'planned', 'future'],
+        ['Scheduled', 'planned', 'future'],
+      ];
+      document.querySelectorAll('#birth .step').forEach((step, index) => {
+        const [label, kind, cls] = states[index];
+        step.className = `step ${cls}`.trim();
+        const statusEl = step.querySelector('.status');
+        if (statusEl) {
+          statusEl.className = `status ${kind}`;
+          statusEl.textContent = label;
+        }
+      });
+    }
+
+    function resetBusinessDemo() {
+      document.getElementById('arbkPreview')?.classList.remove('show');
+      const journeyStatus = document.querySelector('#business [data-journey-status]');
+      if (journeyStatus) {
+        journeyStatus.className = 'status warn';
+        journeyStatus.setAttribute('data-journey-status', '');
+        journeyStatus.textContent = 'Draft';
+      }
+      setFlowDoc('business-nub', 'NUB queued', 'neutral');
+      setFlowDoc('business-tax', 'Fiscal queued', 'neutral');
+    }
+
+    function resetTurningDemo() {
+      const rows = [
+        ['Completed', 'ok'],
+        ['Ready', 'ok'],
+        ['Review', 'warn'],
+        ['Scheduled', 'neutral'],
+        ['+14 days', 'neutral'],
+      ];
+      rows.forEach(([label, kind], index) => setTableStatus('turning18', index + 1, label, kind));
+      setFlowDoc('eighteen-voter', 'Voter queued', 'neutral');
+      setFlowDoc('eighteen-passport', 'Passport queued', 'neutral');
+    }
+
+    function startFlowDemo(flowId) {
+      clearDemoTimers();
+      if (flowId === 'birth') playBirthDemo();
+      if (flowId === 'business') playBusinessDemo();
+      if (flowId === 'turning18') playTurning18Demo();
+    }
+
+    function playBirthDemo() {
+      resetBirthDemo();
+      certificateDoc?.classList.remove('ready-glow');
+      setDocStatus('personal-number', 'Preparing', 'warn');
+      setDocStatus('benefit', 'Waiting IBAN', 'neutral');
+      setDocStatus('vaccine', 'Queued', 'planned');
+      delay(1050, () => {
+        setStep('birth', 4, 'Issued');
+        setDocStatus('personal-number', 'Download ready', 'ok');
+      });
+      delay(1750, () => {
+        setStep('birth', 5, 'Approved');
+        setDocStatus('benefit', 'Approved', 'ok');
+      });
+      delay(2450, () => {
+        setStep('birth', 6, 'Ready');
+      });
+      delay(3150, () => {
+        setStep('birth', 7, 'Scheduled');
+        setDocStatus('vaccine', 'Download ready', 'ok');
+        addNotification('Termin: Vaksina BCG', '24 maj 2026 · 10:00 · Spitali Rajonal i Prizrenit.');
+      });
+    }
+
+    function playBusinessDemo() {
+      resetBusinessDemo();
+      delay(1500, () => {
+        const summary = document.querySelector('#business [data-journey-status]');
+        if (summary) {
+          summary.className = 'status ok';
+          summary.textContent = 'Approved';
+        }
+        setFlowDoc('business-nub', 'NUB 811234567', 'ok');
+      });
+      delay(2100, () => {
+        setFlowDoc('business-tax', 'Fiscal 600901234', 'ok');
+        addNotification('Afati i parë tatimor', 'Krasniqi Digital sh.p.k. · deklarata e parë në ATK pas 90 ditësh.');
+      });
+    }
+
+    function playTurning18Demo() {
+      resetTurningDemo();
+      delay(950, () => {
+        setTableStatus('turning18', 3, 'Confirmed', 'ok');
+        setFlowDoc('eighteen-voter', 'Voter ready', 'ok');
+      });
+      delay(1550, () => {
+        setTableStatus('turning18', 4, 'Active', 'ok');
+      });
+      delay(2250, () => {
+        setTableStatus('turning18', 5, 'Suggested', 'ok');
+      });
+      delay(2950, () => {
+        setFlowDoc('eighteen-passport', 'Passport appointment ready', 'ok');
+        addNotification('Termin për pasaportë', '27 maj 2026 · 11:00 · Drejtoria Rajonale e MPB-së.');
+      });
+    }
+
+    function downloadCertificate() {
+      const html = [
+        '<!doctype html>',
+        '<html lang="sq">',
+        '<head>',
+        '<meta charset="utf-8">',
+        '<title>CL-2026-04781</title>',
+        '<style>',
+        'body{font-family:Arial,sans-serif;max-width:760px;margin:40px auto;padding:40px;color:#161616}',
+        '.head{border-bottom:3px solid #0c4f91;padding-bottom:18px;margin-bottom:24px}',
+        '.seal{border:2px solid #c97456;color:#c97456;display:inline-block;padding:12px;margin-top:24px}',
+        '.row{display:grid;grid-template-columns:180px 1fr;border-bottom:1px solid #ddd;padding:10px 0}',
+        '<\/style>',
+        '<\/head>',
+        '<body>',
+        '<div class="head"><strong>REPUBLIKA E KOSOVËS · REGJISTRI CIVIL</strong><h1>Certifikatë e lindjes</h1><\/div>',
+        '<div class="row"><strong>Referenca</strong><span>CL-2026-04781<\/span><\/div>',
+        '<div class="row"><strong>Fëmija</strong><span>Arta Krasniqi<\/span><\/div>',
+        '<div class="row"><strong>Nëna</strong><span>Lirie Krasniqi · NP ending 4821<\/span><\/div>',
+        '<div class="row"><strong>Vendi</strong><span>Spitali Rajonal i Prizrenit<\/span><\/div>',
+        '<div class="row"><strong>Data</strong><span>22.05.2026<\/span><\/div>',
+        '<div class="seal">E-STAMP · RC PRIZREN<br>SHA-256 9F2C-18B7-4AA0-DC91-77E4<\/div>',
+        '<\/body>',
+        '<\/html>',
+      ].join('');
+      const blob = new Blob([html], { type: 'text/html' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'CL-2026-04781.html';
+      link.click();
+      URL.revokeObjectURL(url);
+      addNotification('Dokumenti u shkarkua', 'Certifikata CL-2026-04781 është gati për përdorim.');
+    }
+
+    function runProactiveTrigger() {
+      const trigger = document.getElementById('proactiveTrigger');
+      if (trigger?.dataset.firing === '1') return;
+      if (trigger) trigger.dataset.firing = '1';
+
+      const notifCountEl = document.getElementById('notifCount');
+      const notifListEl = document.getElementById('notifList');
+      const summaryTiles = document.querySelectorAll('#dashboard .summary-tile');
+      const baseBadge = Number(notifCountEl?.dataset.baseValue ?? notifCountEl?.textContent ?? '0');
+      if (notifCountEl) notifCountEl.dataset.baseValue = String(baseBadge);
+
+      document.querySelector('.notif-item[data-trigger-source]')?.remove();
+
+      showToast('Spitali Rajonal i Prizrenit ka raportuar lindjen e Artës. Hapi po krijon journey-n…');
+
+      delay(420, () => {
+        if (notifCountEl) {
+          notifCountEl.textContent = String(baseBadge + 1);
+          notifCountEl.classList.remove('pop');
+          void notifCountEl.offsetWidth;
+          notifCountEl.classList.add('pop');
+        }
+      });
+
+      delay(820, () => {
+        if (notifListEl) {
+          const item = document.createElement('div');
+          item.className = 'notif-item new';
+          item.dataset.triggerSource = 'proactive-demo';
+          item.innerHTML = '<strong>L01 · Lindja e Artës</strong><span>Journey i ri u nis automatikisht nga njoftimi i HRP.</span>';
+          notifListEl.prepend(item);
+        }
+      });
+
+      delay(1400, () => {
+        summaryTiles.forEach((tile, index) => {
+          setTimeout(() => {
+            tile.classList.remove('bump');
+            void tile.offsetWidth;
+            tile.classList.add('bump');
+          }, index * 90);
+        });
+      });
+
+      delay(2200, () => {
+        showScreen('birth');
+        if (trigger) trigger.dataset.firing = '';
+      });
+    }
+
+    document.getElementById('proactiveTrigger')?.addEventListener('click', runProactiveTrigger);
+
+    if (window.location.hash) {
+      window.history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    showScreen('dashboard');
+  </script>
+</body>
+</html>
